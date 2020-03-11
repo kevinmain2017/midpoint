@@ -43,7 +43,7 @@
 							<label for="exampleInputFile">Tải ảnh xác thực</label>
 							<div class="input-group">
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+									<input type="file" class="custom-file-input" id="exampleInputFile" name="file" multiple="multiple">
 									<label class="custom-file-label" for="exampleInputFile">Chọn file</label>
 								</div>
 								<div class="input-group-append">

@@ -1,7 +1,12 @@
 package fis.com.vn.common;
 
+import java.io.File;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Map;
 
 import org.json.JSONObject;
@@ -54,6 +59,31 @@ public class Request {
 			return response.getBody();
 		} catch (Exception e) {
 			// TODO: handle exception
+		}
+		return null;
+	}
+	public static String postFile(String json, String authorization, String url, MultipartFile[] file) {
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			headers.add("Authorization", authorization);
+
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+			for (int i = 0; i < file.length; i++) {
+				body.add("file"+(i+1), Base64.getEncoder().encode(file[i].getBytes()));
+			}
+			
+			body.add("json", json);
+
+			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+			
+			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+			return response.getBody();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

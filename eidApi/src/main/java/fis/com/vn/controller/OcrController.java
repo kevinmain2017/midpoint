@@ -1,5 +1,6 @@
 package fis.com.vn.controller;
 
+import java.util.Base64;
 import java.util.Map;
 import java.util.UUID;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fis.ocr.OCRParser;
 import com.google.gson.Gson;
 
 import fis.com.vn.entities.OCRField;
@@ -28,8 +30,11 @@ public class OcrController {
 	
 	@PostMapping(value = "/api/get-info-ocr")
 	@ResponseBody
-	public String getInfoOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams, @RequestParam("file") byte[] file) {
+	public String getInfoOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams, @RequestParam("file1") byte[] file, @RequestParam("file2") byte[] file2) {
 		Resp resp = new Resp();
+		
+		OCRParser parser = new OCRParser();
+        System.err.println(parser.parsingToJson(Base64.getDecoder().decode(file), Base64.getDecoder().decode(file2)));
 		
 		resp.setData(new OCRField().createExample());
 		resp.setStatusCode(HttpStatus.OK.value());
