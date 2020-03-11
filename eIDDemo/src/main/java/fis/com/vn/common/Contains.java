@@ -4,6 +4,7 @@ public class Contains {
 	// URL API
 	public final static String PATH_API = "/api/";
 	public final static String URL_DANG_NHAP = PATH_API + "login";
+	public final static String URL_DANG_KY = PATH_API + "register";
 	public final static String URL_LOAI_XAC_THUC = PATH_API + "type";
 	public final static String URL_DANH_SACH_XAC_THUC = PATH_API + "list-type";
 	public final static String URL_XOA_XAC_THUC = PATH_API + "delete-user-type";

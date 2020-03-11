@@ -4,42 +4,52 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="f"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:set var="contextPath" value="${pageContext.servletContext.contextPath}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>EID | Log in</title>
+<title>EID | Registration Page</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="${contextPath }/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet"
+	href="${contextPath }/plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- icheck bootstrap -->
-<link rel="stylesheet" href="${contextPath }/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<link rel="stylesheet"
+	href="${contextPath }/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="${contextPath }/dist/css/adminlte.min.css">
 <!-- Google Font: Source Sans Pro -->
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+	rel="stylesheet">
+<!-- jQuery -->
+	<script src="${contextPath }/plugins/jquery/jquery.min.js"></script>
+	
 </head>
-<body class="hold-transition login-page">
-	<div class="login-box">
-		<div class="login-logo">
-			<a href="/login"> EID </a>
+<body class="hold-transition register-page">
+	<div class="register-box">
+		<div class="register-logo">
+			<a href="/login"><b>Admin</b>EID</a>
 		</div>
-		<!-- /.login-logo -->
+
 		<div class="card">
-			<div class="card-body login-card-body">
-				<p class="login-box-msg">Đăng nhập vào hệ thống</p>
+			<div class="card-body register-card-body">
+				<p class="login-box-msg">Đăng ký thành viên</p>
 				<c:if test="${not empty error }">
 					<div class="alert alert-danger" role="alert">${error }</div>
 				</c:if>
-				<form action="${contextpath }/login" method="post">
+				<c:if test="${not empty success }">
+					<div class="alert alert-success" role="alert">${success }</div>
+				</c:if>
+				<form action="" method="post">
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Tên đăng nhập" name="userName">
+						<input type="text" class="form-control" placeholder="Tên đầy đủ" name="fullName">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -47,7 +57,15 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="password" class="form-control" placeholder="Mật khẩu" name="password">
+						<input type="text" class="form-control" placeholder="Tên đăng nhập" name="name">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input type="password" class="form-control" placeholder="Mật khẩu" name="password"/>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-lock"></span>
@@ -56,26 +74,24 @@
 					</div>
 					<div class="row">
 						<div class="col-12">
-							<button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+							<button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
 						</div>
 						<!-- /.col -->
 					</div>
 				</form>
-				<p class="mb-0">
-					<a href="${contextPath }/register" class="text-center">Đăng ký</a>
-				</p>
-			</div>
-			<!-- /.login-card-body -->
-		</div>
-	</div>
-	<!-- /.login-box -->
 
-	<!-- jQuery -->
-	<script src="${contextPath }/plugins/jquery/jquery.min.js"></script>
+				<a href="/login" class="text-center">Đăng nhập</a>
+			</div>
+			<!-- /.form-box -->
+		</div>
+		<!-- /.card -->
+	</div>
+	<!-- /.register-box -->
+
+	
 	<!-- Bootstrap 4 -->
 	<script src="${contextPath }/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="${contextPath }/dist/js/adminlte.min.js"></script>
-
 </body>
 </html>

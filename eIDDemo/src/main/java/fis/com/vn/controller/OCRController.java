@@ -37,34 +37,6 @@ public class OCRController extends BaseController{
 	
 	@PostMapping(value = "/dang-ky-xac-thuc/xac-thuc-ocr")
 	public String postXacThucOcr(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile[] file) {
-		
-		File file1 = new File("C:\\Users\\vdc\\Pictures\\matsau.jpg");
-        File file2 = new File("C:\\Users\\vdc\\Pictures\\mattruoc.jpg");
-        byte[] fileContent1 = null;
-        byte[] fileContent2 = null;
-        try {
-            fileContent1 = Files.readAllBytes(file1.toPath());
-            fileContent2 = Files.readAllBytes(file2.toPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        long s = System.currentTimeMillis();
-        OCRParser parser1 = new OCRParser();
-        System.err.println(parser1.parsingToJson(fileContent1, fileContent2));
-        System.err.println(System.currentTimeMillis() - s + " ms");
-		
-		OCRParser parser = new OCRParser();
-        try {
-            byte[] bytes1 = IOUtils.toByteArray(file[0].getInputStream());
-            byte[] bytes2 = IOUtils.toByteArray(file[1].getInputStream());
-			System.err.println(parser.parsingToJson(bytes1, bytes2));
-			
-			System.out.println(Arrays.equals(fileContent1, bytes1));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		String json = Request.postFile("json", this.getAuthorizationToken(req), origin + Contains.URL_LY_THONG_TIN_OCR, file);
 		
 		if(Request.getStatus(json) == 200) {

@@ -238,4 +238,19 @@ public class Request {
 	public static int getStatus(String json) {
 		return getIntFromJson(json, "statusCode");
 	}
+
+	public static String post(UriComponentsBuilder builder, String authorization) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", authorization);
+		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+
+		ResponseEntity<String> response;
+
+		response = restTemplate.exchange(builder.toUriString(), HttpMethod.POST, entity, String.class);
+
+		return response.getBody();
+	}
 }

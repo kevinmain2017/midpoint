@@ -26,15 +26,6 @@ public class EidFilter extends GenericFilterBean{
 		HttpServletResponse resp = (HttpServletResponse) response;
 		resp.setCharacterEncoding("utf-8");
 		req.setCharacterEncoding("utf-8");
-		if (allowUrl(req)) {
-			chain.doFilter(request, response);
-			return;
-		}
-		
-		if(req.getSession().getAttribute("userName") == null) {
-			resp.sendRedirect("/login");
-		}
-		
 		chain.doFilter(request, response);
 	}
 	public Boolean allowUrl(HttpServletRequest req) {
