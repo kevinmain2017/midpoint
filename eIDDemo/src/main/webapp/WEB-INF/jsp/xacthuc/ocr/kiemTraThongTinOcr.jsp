@@ -9,7 +9,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Đăng ký xác thực</h1>
+					<h1 class="m-0 text-dark">Xác thực</h1>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
@@ -37,7 +37,7 @@
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form role="form" id="quickForm" method="post" action="${contextPath }/dang-ky-xac-thuc/doi-chieu-ocr">
+				<form role="form" id="quickForm" method="post" action="${contextPath }/xac-thuc/doi-chieu-ocr">
 					<div class="card-body">
 						<div class="form-group">
 							<label for="hoTen">Họ và tên</label>
@@ -74,7 +74,6 @@
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<a href="/dang-ky-xac-thuc/xac-thuc-ocr" class="btn btn-default">Quay lại</a>
 						<button type="submit" class="btn btn-primary">Đối chiếu thông tin</button>
 					</div>
 				</form>

@@ -32,19 +32,14 @@ public class DangKyController extends BaseController{
 	@PostMapping(value = "/register") 
 	public String postLogin(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams,RedirectAttributes redirectAttributes) {
 		try {
-			UriComponentsBuilder builderChitieuTemplate = UriComponentsBuilder.fromHttpUrl(origin + Contains.URL_DANG_KY)
-					.queryParam("name", allParams.get("name"))
-					.queryParam("fullName", allParams.get("fullName"))
-					.queryParam("password", allParams.get("password"));
-			
 			ParamsUser paramsUser = new ParamsUser();
 			paramsUser.setName(allParams.get("name"));
 			paramsUser.setFullName(allParams.get("fullName"));
 			paramsUser.setPassword(allParams.get("password"));
+			paramsUser.setPhone(allParams.get("phone"));
 			
 			String json = Request.post(new Gson().toJson(paramsUser), this.getAuthorizationToken(req), origin + Contains.URL_DANG_KY);
 			if(Request.getStatus(json) == 200) {
-				JsonUser user = Request.getList(json, JsonUser.class, "data");
 				model.addAttribute("success", "Đăng ký thành công");
 			} else {
 				model.addAttribute("error", "Lỗi đăng ký");

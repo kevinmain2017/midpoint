@@ -10,8 +10,10 @@ public class Contains {
 	public final static String URL_XOA_XAC_THUC = PATH_API + "delete-user-type";
 	public final static String URL_LY_THONG_TIN_OCR = PATH_API + "get-info-ocr";
 	public final static String URL_DOI_CHIEU_THONG_TIN_OCR = PATH_API + "valid-ocr";
-	
+	public static final String URL_DOI_CHIEU_THONG_TIN_OTP = PATH_API + "valid-otp";
+	public static final String URL_LAY_MA_OTP = PATH_API + "get-code-otp";
 	public final static String URL_DOI_CHIEU_THONG_TIN_FACE_ID = PATH_API + "valid-face-id";
+	public static final String URL_KY_SO = PATH_API + "digital-signatures";
 	
 	//Loai xac thuc
 	public final static String OCR = "ocr";
@@ -19,4 +21,7 @@ public class Contains {
 	public final static String FACE_ID = "faceid";
 	public final static String CHU_KY_SO = "ca";
 	public final static String USER_PASS = "up";
+	
+	
+	
 }

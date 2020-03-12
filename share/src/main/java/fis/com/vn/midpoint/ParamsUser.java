@@ -7,4 +7,5 @@ public class ParamsUser {
 	String name;
 	String fullName;
 	String password;
+	String phone;
 }

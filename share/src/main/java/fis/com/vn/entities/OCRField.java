@@ -4,37 +4,41 @@ import lombok.Data;
 
 @Data
 public class OCRField {
-	String hoTen;
-	String soCMT;
-	String ngayThang;
-	String gioiTinh;
-	String danToc;
-	String queQuan;
-	String noiTru;
+	String name;
+	String id;
+	String dob;
+	String sex;
+	String ethnicity;
+	String home;
+	String address;
+	String religion;
+	
 	String userOid;
 	String typeCode;
 	
 	public OCRField createExample() {
 		OCRField ocrField = new OCRField();
-		ocrField.setDanToc("Kinh");
-		ocrField.setGioiTinh("Nam");
-		ocrField.setHoTen("Nguyễn Văn A");
-		ocrField.setNgayThang("12/6/1980");
-		ocrField.setNoiTru("Cầu giấy, Hà nội");
-		ocrField.setQueQuan("Hà Nội");
-		ocrField.setSoCMT("0589444777555");
+		ocrField.setEthnicity("KINH");
+		ocrField.setSex("MALE");
+		ocrField.setName("BÙI ĐỨC THIỆN");
+		ocrField.setDob("27/01/1990");
+		ocrField.setAddress("THÁI HỒNG, HUYỆN THÁI THỤY, THÁI BÌNH");
+		ocrField.setHome("XÃ THÁI HỒNG, HUYỆN THÁI THỤY, THÁI BÌNH");
+		ocrField.setId("151954047");
+		ocrField.setReligion("KHÔNG");
 		
 		return ocrField;
 	}
 	
 	public boolean compare(OCRField oCRField) {
-		if(oCRField.getDanToc().equals(danToc)
-				&& oCRField.getGioiTinh().equals(gioiTinh)
-				&& oCRField.getHoTen().equals(hoTen)
-				&& oCRField.getNgayThang().equals(ngayThang)
-				&& oCRField.getNoiTru().equals(noiTru)
-				&& oCRField.getQueQuan().equals(queQuan)
-				&& oCRField.getSoCMT().equals(soCMT)
+		if(oCRField.getEthnicity().equals(ethnicity)
+				&& oCRField.getSex().equals(sex)
+				&& oCRField.getName().equals(name)
+				&& oCRField.getDob().equals(dob)
+				&& oCRField.getAddress().equals(address)
+				&& oCRField.getHome().equals(home)
+				&& oCRField.getId().equals(id)
+				&& oCRField.getReligion().equals(religion)
 				) {
 			return true;
 		}

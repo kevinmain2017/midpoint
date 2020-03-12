@@ -35,6 +35,18 @@ public class DangKyXacThucController extends BaseController{
 			} else {
 				model.addAttribute("error", "Lỗi api");
 			}
+			
+			builderChitieuTemplate = UriComponentsBuilder.fromHttpUrl(origin + Contains.URL_DANH_SACH_XAC_THUC)
+					.queryParam("user_oid", getOid(req));
+			json = Request.get(builderChitieuTemplate,this.getAuthorizationToken(req));
+			if(Request.getStatus(json) == 200) {
+				Type type = new TypeToken<ArrayList<MType>>() {}.getType();
+				List<MType> mTypes = Request.getList(json, type, "data");
+				
+				model.addAttribute("mTypeRegisters", mTypes);
+			} else {
+				model.addAttribute("error", "Lỗi api");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

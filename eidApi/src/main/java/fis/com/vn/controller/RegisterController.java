@@ -1,11 +1,11 @@
 package fis.com.vn.controller;
 
 import java.nio.charset.Charset;
-import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,12 +17,12 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.Gson;
 
+import fis.com.vn.common.Common;
 import fis.com.vn.midpoint.Activation;
 import fis.com.vn.midpoint.Assignment;
 import fis.com.vn.midpoint.Credentials;
@@ -31,12 +31,16 @@ import fis.com.vn.midpoint.ParamsUser;
 import fis.com.vn.midpoint.Password;
 import fis.com.vn.midpoint.TargetRef;
 import fis.com.vn.midpoint.User;
+import fis.com.vn.repository.MUserRepository;
 import fis.com.vn.resp.Resp;
 
 @Controller
 public class RegisterController extends BaseController{
 	@Value("${spring.api.midpoint}")
 	public String apiMidpoint;
+	
+	@Autowired
+	MUserRepository mUserRepository;
 	
 	@PostMapping(value = "/api/register", produces = "text/plain;charset=UTF-8")
 	@ResponseBody
@@ -45,6 +49,7 @@ public class RegisterController extends BaseController{
 		JsonUser user = createUserInsert(paramsUser);
 		int check = insertToApiMidPoint(new Gson().toJson(user));
 		if(check == 201) {
+			mUserRepository.update(Common.getMD5(paramsUser.getPassword()), paramsUser.getPhone(), user.getUser().getOid());
 			resp.setStatusCode(HttpStatus.OK.value());
 			resp.setData(new Gson().toJson(user));
 		} else {

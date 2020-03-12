@@ -41,35 +41,31 @@
 					<div class="card-body">
 						<div class="form-group">
 							<label for="hoTen">Họ và tên</label>
-							<input type="text" class="form-control" id="hoTen" value="${oCRField.name }" name="name">
+							<input type="text" class="form-control" id="hoTen" value="${oCRField.hoTen }" name="hoTen">
 						</div>
 						<div class="form-group">
 							<label for="soCMT">Số CMT</label>
-							<input type="text" class="form-control" id="soCMT" value="${oCRField.id }" name="id">
+							<input type="text" class="form-control" id="soCMT" value="${oCRField.soCMT }" name="soCMT">
 						</div>
 						<div class="form-group">
 							<label for="ngayThang">Ngày tháng năm sinh</label>
-							<input type="text" class="form-control" id="ngayThang" value="${oCRField.dob }" name="dob">
+							<input type="text" class="form-control" id="ngayThang" value="${oCRField.ngayThang }" name="ngayThang">
 						</div>
 						<div class="form-group">
 							<label for="gioiTinh">Giới tính</label>
-							<input type="text" class="form-control" id="gioiTinh" value="${oCRField.sex }" name="sex">
+							<input type="text" class="form-control" id="gioiTinh" value="${oCRField.gioiTinh }" name="gioiTinh">
 						</div>
 						<div class="form-group">
 							<label for="danToc">Dân tộc</label>
-							<input type="text" class="form-control" id="danToc" value="${oCRField.ethnicity }" name="ethnicity">
+							<input type="text" class="form-control" id="danToc" value="${oCRField.danToc }" name="danToc">
 						</div>
 						<div class="form-group">
 							<label for="queQuan">Quê quán</label>
-							<input type="text" class="form-control" id="queQuan" value="${oCRField.home }" name="home">
+							<input type="text" class="form-control" id="queQuan" value="${oCRField.queQuan }" name="queQuan">
 						</div>
 						<div class="form-group">
 							<label for="noiTru">Nơi trú</label>
-							<input type="text" class="form-control" id="noiTru" value="${oCRField.address }" name="address">
-						</div>
-						<div class="form-group">
-							<label for="tonGiao">Tôn giáo</label>
-							<input type="text" class="form-control" id="tonGiao" value="${oCRField.religion }" name="religion">
+							<input type="text" class="form-control" id="noiTru" value="${oCRField.noiTru }" name="noiTru">
 						</div>
 					</div>
 					<!-- /.card-body -->

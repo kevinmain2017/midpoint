@@ -105,7 +105,7 @@
 			<!-- Brand Logo -->
 			<a href="${contentPath }/" class="brand-link">
 				<img src="${contentPath }/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-				<span class="brand-text font-weight-light">EID</span>
+				<span class="brand-text font-weight-light"><b>Admin </b>EID</span>
 			</a>
 
 			<!-- Sidebar -->
@@ -113,7 +113,7 @@
 				<!-- Sidebar user panel (optional) -->
 				<div class="user-panel mt-3 pb-3 mb-3 d-flex">
 					<div class="image">
-						<img src="${contentPath }/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+						<img src="${contentPath }/image/default-user.png" class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
 						<a href="#" class="d-block">${userName }</a>

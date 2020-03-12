@@ -57,6 +57,14 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Số điện thoại" name="phone">
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-phone"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
 						<input type="text" class="form-control" placeholder="Tên đăng nhập" name="name">
 						<div class="input-group-append">
 							<div class="input-group-text">

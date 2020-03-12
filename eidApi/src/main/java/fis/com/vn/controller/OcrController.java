@@ -1,6 +1,5 @@
 package fis.com.vn.controller;
 
-import java.util.Base64;
 import java.util.Map;
 import java.util.UUID;
 
@@ -30,13 +29,14 @@ public class OcrController {
 	
 	@PostMapping(value = "/api/get-info-ocr")
 	@ResponseBody
-	public String getInfoOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams, @RequestParam("file1") byte[] file, @RequestParam("file2") byte[] file2) {
+	public String getInfoOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams) {
 		Resp resp = new Resp();
 		
 		OCRParser parser = new OCRParser();
-        System.err.println(parser.parsingToJson(Base64.getDecoder().decode(file), Base64.getDecoder().decode(file2)));
+        String jsonOcr = parser.parsingToJson(allParams.get("file2"), allParams.get("file1"));
 		
-		resp.setData(new OCRField().createExample());
+        OCRField ocrField = new Gson().fromJson(jsonOcr, OCRField.class);
+		resp.setData(ocrField);
 		resp.setStatusCode(HttpStatus.OK.value());
 		return new Gson().toJson(resp);
 	}

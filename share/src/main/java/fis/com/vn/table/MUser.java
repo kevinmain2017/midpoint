@@ -12,6 +12,7 @@ import lombok.Data;
 public class MUser {
 	@Id
 	String oid;
-	
 	String nameNorm;
+	String password;
+	String phone;
 }

@@ -14,9 +14,8 @@
 				<!-- /.col -->
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
-						<li class="breadcrumb-item">
-							<a href="${contextPath }/">Trang chủ</a>
-						</li>
+						<li class="breadcrumb-item"><a href="${contextPath }/">Trang
+								chủ</a></li>
 						<li class="breadcrumb-item active">Chọn hình thức đăng ký</li>
 					</ol>
 				</div>
@@ -33,25 +32,37 @@
 		<div class="container-fluid">
 			<div class="card card-primary">
 				<div class="card-header">
-					<h3 class="card-title">
-						Chọn loại hình xác thực
-					</h3>
+					<h3 class="card-title">Chọn loại hình xác thực</h3>
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form role="form" id="quickForm" method="get" action="${contextPath }/dang-ky-xac-thuc/dieu-huong">
+				<form role="form" id="quickForm" method="get"
+					action="${contextPath }/dang-ky-xac-thuc/dieu-huong">
 					<div class="card-body">
-						<div class="form-group">
-							<select class="form-control" name="type">
-								<c:forEach items="${mTypes }" var="item">
-									<option value="${item.code }">${item.name }</option>
-								</c:forEach>
-							</select>
-						</div>
+						<c:if test="${fn:length(mTypes) ne fn:length(mTypeRegisters) }">
+							<div class="form-group">
+								<select class="form-control" name="type">
+									<c:forEach items="${mTypes }" var="item">
+										<c:set var="check" value="0"></c:set>
+										<c:forEach items="${mTypeRegisters }" var="it">
+											<c:if test="${item.code eq it.code }">
+												<c:set var="check" value="1"></c:set>
+											</c:if>
+										</c:forEach>
+										<c:if test="${check eq 0 }">
+											<option value="${item.code }">${item.name }</option>
+										</c:if>
+									</c:forEach>
+								</select>
+							</div>
+						</c:if>
+						<c:if test="${fn:length(mTypes) eq fn:length(mTypeRegisters) }">
+							Không còn phương thức xác thực
+						</c:if>
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Xác thực</button>
+						<button type="submit" class="btn btn-primary">Đăng ký</button>
 					</div>
 				</form>
 			</div>
