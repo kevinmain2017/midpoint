@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +26,9 @@ public class ChuKySoController extends BaseController{
 	}
 	
 	@PostMapping(value = "/dang-ky-xac-thuc/xac-thuc-ca")
-	public String postXacThucOcr(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, @RequestParam Map<String , String> allParams) {
-		String url = origin + Contains.URL_KY_SO+"?user_oid="+getOid(req)+"&type_code="+Contains.CHU_KY_SO+"&serial="+allParams.get("serial");
-		String json = Request.postFile("", this.getAuthorizationToken(req), url, file);
+	public String postXacThucOcr(Model model, HttpServletRequest req, RedirectAttributes redirectAttributes, @RequestParam Map<String , String> allParams) {
+		String url = origin + Contains.URL_DANG_KY_KY_SO+"?user_oid="+getOid(req)+"&type_code="+Contains.CHU_KY_SO+"&serial="+allParams.get("serial");
+		String json = Request.post("", this.getAuthorizationToken(req), url);
 		
 		if(Request.getStatus(json) == 200) {
 			return "dangkyxacthuc/chukyso/thanhCong";
@@ -46,7 +47,7 @@ public class ChuKySoController extends BaseController{
 	
 	@PostMapping(value = "/xac-thuc/xac-thuc-ca")
 	public String postXacThucOcr2(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-		String url = origin + Contains.URL_KY_SO+"?user_oid="+getOid(req)+"&type_code="+Contains.CHU_KY_SO;
+		String url = origin + Contains.URL_KY_SO+"?user_oid="+getOid(req)+"&type_code="+Contains.CHU_KY_SO+"&type_file="+FilenameUtils.getExtension(file.getOriginalFilename());
 		String json = Request.postFile("", this.getAuthorizationToken(req), url, file);
 		
 		if(Request.getStatus(json) == 200) {

@@ -25,16 +25,18 @@ public class Test2 {
 //        byte[] xmlBinary = IOUtils.toByteArray(new FileInputStream("C:\\Users\\vdc\\Downloads\\file\\test.xml"));
 //        String xmlData = new String(xmlBinary, "UTF-8");
 //        byte[] signed = eSignDemo.signXmlUsingPassCode(agreementUUID, xmlData, pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
+//        
+//        System.out.println(signed);
 //        IOUtils.write(signed, new FileOutputStream(new File("C:\\Users\\vdc\\Downloads\\file\\xml_signed.xml")));
-//
-//        // sign file pdf
-//        byte[] pdfBinary = IOUtils.toByteArray(new FileInputStream("C:\\Users\\vdc\\Downloads\\file\\test.pdf"));
-//        byte[] signedPdf = eSignDemo.signPdfUsingPassCode(agreementUUID, pdfBinary, pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
-//        IOUtils.write(signedPdf, new FileOutputStream(new File("C:\\Users\\vdc\\Downloads\\file\\pdf_signed.pdf")));
 
-        // Face ID ;
-        String imageBase64 = OCRParser.encodeFileToBase64Binary(new File("C:\\Users\\vdc\\Downloads\\imgpsh_fullsize_anim.jpg"));
-        System.out.println(imageBase64);
-        System.err.println(FaceID.faceRecognition(imageBase64));
+//        // sign file pdf
+        byte[] pdfBinary = IOUtils.toByteArray(new FileInputStream("C:\\Users\\vdc\\Downloads\\file\\test.pdf"));
+        byte[] signedPdf = eSignDemo.signPdfUsingPassCode(agreementUUID, pdfBinary, pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
+        IOUtils.write(signedPdf, new FileOutputStream(new File("C:\\Users\\vdc\\Downloads\\file\\pdf_signed.pdf")));
+//
+//        // Face ID ;
+//        String imageBase64 = OCRParser.encodeFileToBase64Binary(new File("C:\\Users\\vdc\\Downloads\\imgpsh_fullsize_anim.jpg"));
+//        System.out.println(imageBase64);
+//        System.err.println(FaceID.faceRecognition(imageBase64));
     }
 }

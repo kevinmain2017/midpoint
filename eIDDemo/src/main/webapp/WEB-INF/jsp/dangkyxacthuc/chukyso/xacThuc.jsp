@@ -37,10 +37,10 @@
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form role="form" id="quickForm" method="post" action="${contextPath }/dang-ky-xac-thuc/xac-thuc-ca" enctype="multipart/form-data">
+				<form role="form" id="quickForm" method="post" action="${contextPath }/dang-ky-xac-thuc/xac-thuc-ca">
 					<div class="card-body">
 						<div class="form-group">
-							<label for="exampleInputFile">Nhập Serial của chữ ký số</label>
+							<label for="exampleInputFile">Nhập Serial của chữ ký số (<i>Demo: 202003042228</i>)</label>
 							<input type="text" class="form-control" id="exampleInputFile" name="serial">
 						</div>
 					</div>

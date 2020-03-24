@@ -54,7 +54,7 @@
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Tải file</button>
+						<button type="submit" class="btn btn-primary">Ký số</button>
 					</div>
 				</form>
 			</div>
@@ -73,6 +73,14 @@ $(document).ready(function () {
   			e.preventDefault();
   		}
   	});
+  	
+  	$("#exampleInputFile").change(function () {
+        var fileExtension = ['xml', 'pdf'];
+        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        	alertER("Bạn chỉ có thể chọn file : "+fileExtension.join(', '));
+        }
+    });
 });
+
 </script>
 <%@include file="../../layout/footer.jsp"%>
