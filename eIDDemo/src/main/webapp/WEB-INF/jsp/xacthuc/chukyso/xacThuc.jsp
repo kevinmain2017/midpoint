@@ -72,7 +72,7 @@ $(document).ready(function () {
   			alertER("Chọn file cần tải");
   			e.preventDefault();
   		}
-  		if(!checkExFile($(this))) {
+  		if(!checkExFile($("#exampleInputFile"))) {
   			e.preventDefault();
   		}
   	});
