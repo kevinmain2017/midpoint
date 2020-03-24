@@ -62,6 +62,75 @@ public class Request {
 		}
 		return null;
 	}
+	public static String postFileEncode(String json, String authorization, String url, MultipartFile file) {
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			headers.add("Authorization", authorization);
+
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+			body.add("file", Base64.getEncoder().encode(file.getBytes()));
+			body.add("json", json);
+
+			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+			
+			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+			return response.getBody();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	public static String postFile(String json, String authorization, String url, MultipartFile fileMattruoc, MultipartFile fileMatSau) {
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			headers.add("Authorization", authorization);
+
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+			body.add("fileMattruoc", Base64.getEncoder().encode(fileMattruoc.getBytes()));
+			body.add("fileMatSau", Base64.getEncoder().encode(fileMatSau.getBytes()));
+			body.add("json", json);
+
+			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+			
+			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+			return response.getBody();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	public static String postFile(String json, String authorization, String url, MultipartFile file1, MultipartFile file2, MultipartFile file3) {
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			headers.add("Authorization", authorization);
+
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+			body.add("file1", Base64.getEncoder().encode(file1.getBytes()));
+			body.add("file2", Base64.getEncoder().encode(file2.getBytes()));
+			body.add("file3", Base64.getEncoder().encode(file3.getBytes()));
+			body.add("json", json);
+
+			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+			
+			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+			return response.getBody();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 	public static String postFile(String json, String authorization, String url, MultipartFile[] file) {
 		try {
 			RestTemplate restTemplate = new RestTemplate();
@@ -94,6 +163,19 @@ public class Request {
 		restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		headers.add("Authorization", authorization);
+
+		HttpEntity<String> entity = new HttpEntity<String>(json, headers);
+		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+		return response.getBody();
+	}
+	
+	public static String postMultipartFile(String json, String authorization, String url) {
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 		headers.add("Authorization", authorization);
 
 		HttpEntity<String> entity = new HttpEntity<String>(json, headers);
@@ -237,6 +319,10 @@ public class Request {
 
 	public static int getStatus(String json) {
 		return getIntFromJson(json, "statusCode");
+	}
+	
+	public static String getMessage(String json) {
+		return getAttrFromJson(json, "msg");
 	}
 
 	public static String post(UriComponentsBuilder builder, String authorization) {

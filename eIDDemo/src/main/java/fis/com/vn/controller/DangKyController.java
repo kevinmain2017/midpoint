@@ -1,5 +1,6 @@
 package fis.com.vn.controller;
 
+import java.util.Base64;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -30,7 +32,8 @@ public class DangKyController extends BaseController{
 	}
 	
 	@PostMapping(value = "/register") 
-	public String postLogin(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams,RedirectAttributes redirectAttributes) {
+	public String postLogin(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams,
+			RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file, @RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2) {
 		try {
 			ParamsUser paramsUser = new ParamsUser();
 			paramsUser.setName(allParams.get("name"));
@@ -38,7 +41,7 @@ public class DangKyController extends BaseController{
 			paramsUser.setPassword(allParams.get("password"));
 			paramsUser.setPhone(allParams.get("phone"));
 			
-			String json = Request.post(new Gson().toJson(paramsUser), this.getAuthorizationToken(req), origin + Contains.URL_DANG_KY);
+			String json = Request.postFile(new Gson().toJson(paramsUser), this.getAuthorizationToken(req), origin + Contains.URL_DANG_KY, file, file1, file2);
 			if(Request.getStatus(json) == 200) {
 				model.addAttribute("success", "Đăng ký thành công");
 			} else {

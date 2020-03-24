@@ -23,12 +23,12 @@ public class FaceIDController extends BaseController{
 	@PostMapping(value = "/dang-ky-xac-thuc/xac-thuc-face-id")
 	public String postXacThucOcr(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		String url = origin + Contains.URL_DOI_CHIEU_THONG_TIN_FACE_ID+"?user_oid="+getOid(req)+"&type_code="+Contains.FACE_ID;
-		String json = Request.postFile("", this.getAuthorizationToken(req), url, file);
+		String json = Request.postFileEncode("", this.getAuthorizationToken(req), url, file);
 		
 		if(Request.getStatus(json) == 200) {
 			return "dangkyxacthuc/faceid/thanhCong";
 		} else {
-			redirectAttributes.addFlashAttribute("error", "Xác thực thất bại");
+			redirectAttributes.addFlashAttribute("error", "Ảnh nhận dạng không đúng.");
 		}
 		
 		return "redirect:/dang-ky-xac-thuc/xac-thuc-face-id";
@@ -42,7 +42,7 @@ public class FaceIDController extends BaseController{
 	@PostMapping(value = "/xac-thuc/xac-thuc-face-id")
 	public String postXacThucOcr2(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		String url = origin + Contains.URL_DOI_CHIEU_THONG_TIN_FACE_ID+"?user_oid="+getOid(req)+"&type_code="+Contains.FACE_ID;
-		String json = Request.postFile("", this.getAuthorizationToken(req), url, file);
+		String json = Request.postFileEncode("", this.getAuthorizationToken(req), url, file);
 		
 		if(Request.getStatus(json) == 200) {
 			redirectAttributes.addFlashAttribute("success", "Xác thực Face ID thành công");

@@ -63,7 +63,7 @@ public class DangKyXacThucController extends BaseController{
 		if(type.equals(Contains.OCR)) {
 			return "redirect:/dang-ky-xac-thuc/xac-thuc-ocr";
 		} else if(type.equals(Contains.OTP)) {
-			return "redirect:/dang-ky-xac-thuc/xac-thuc-otp";
+			return "redirect:/dang-ky-xac-thuc/gui-ma-otp";
 		} else if(type.equals(Contains.CHU_KY_SO)) {
 			return "redirect:/dang-ky-xac-thuc/xac-thuc-ca";
 		} else if(type.equals(Contains.FACE_ID)) {

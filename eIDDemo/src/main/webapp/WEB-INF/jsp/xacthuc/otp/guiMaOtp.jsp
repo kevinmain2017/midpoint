@@ -9,7 +9,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Đăng ký xác thực</h1>
+					<h1 class="m-0 text-dark">Xác thực</h1>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
@@ -17,7 +17,7 @@
 						<li class="breadcrumb-item">
 							<a href="${contextPath }/">Trang chủ</a>
 						</li>
-						<li class="breadcrumb-item active">Xác thực chữ ký số</li>
+						<li class="breadcrumb-item active">Xác thực OTP</li>
 					</ol>
 				</div>
 				<!-- /.col -->
@@ -33,21 +33,21 @@
 		<div class="container-fluid">
 			<div class="card card-primary">
 				<div class="card-header">
-					<h3 class="card-title">Xác thực chữ ký số</h3>
+					<h3 class="card-title">Xác thực OTP</h3>
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form role="form" id="quickForm" method="post" action="${contextPath }/dang-ky-xac-thuc/xac-thuc-ca" enctype="multipart/form-data">
+				<form role="form" id="quickForm" method="get" action="${contextPath }/xac-thuc/xac-thuc-otp">
 					<div class="card-body">
 						<div class="form-group">
-							<label for="exampleInputFile">Nhập Serial của chữ ký số</label>
-							<input type="text" class="form-control" id="exampleInputFile" name="serial">
+							<label for="exampleInputFile">Nhập số điện thoại</label>
+							<input type="text" class="form-control" id="exampleInputFile" name="phone">
 						</div>
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
 						<a href="/dang-ky-xac-thuc" class="btn btn-default">Quay lại</a>
-						<button type="submit" class="btn btn-primary">Lưu</button>
+						<button type="submit" class="btn btn-primary">Gửi mã OTP</button>
 					</div>
 				</form>
 			</div>
@@ -62,7 +62,7 @@ $(document).ready(function () {
   	bsCustomFileInput.init();
   	$("#quickForm").submit(function(e){
   		if($("#exampleInputFile").val() == "") {
-  			alertER("Chọn file cần tải");
+  			alertER("Nhập vào số điện thoại nhận mã.");
   			e.preventDefault();
   		}
   	});

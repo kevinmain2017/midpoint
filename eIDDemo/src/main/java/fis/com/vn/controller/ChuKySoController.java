@@ -1,5 +1,7 @@
 package fis.com.vn.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -23,8 +25,8 @@ public class ChuKySoController extends BaseController{
 	}
 	
 	@PostMapping(value = "/dang-ky-xac-thuc/xac-thuc-ca")
-	public String postXacThucOcr(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-		String url = origin + Contains.URL_KY_SO+"?user_oid="+getOid(req)+"&type_code="+Contains.CHU_KY_SO;
+	public String postXacThucOcr(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes, @RequestParam Map<String , String> allParams) {
+		String url = origin + Contains.URL_KY_SO+"?user_oid="+getOid(req)+"&type_code="+Contains.CHU_KY_SO+"&serial="+allParams.get("serial");
 		String json = Request.postFile("", this.getAuthorizationToken(req), url, file);
 		
 		if(Request.getStatus(json) == 200) {

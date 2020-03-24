@@ -40,11 +40,20 @@
 				<form role="form" id="quickForm" method="post" action="${contextPath }/xac-thuc/xac-thuc-ocr" enctype="multipart/form-data">
 					<div class="card-body">
 						<div class="form-group">
-							<label for="exampleInputFile">Tải ảnh xác thực</label>
+							<label for="exampleInputFile">Tải căn cước công dân</label>
 							<div class="input-group">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="exampleInputFile" name="file" multiple="multiple">
-									<label class="custom-file-label" for="exampleInputFile">Chọn file</label>
+								<div class="custom-file" style="display: block;">
+									<input type="file" class="custom-file-input" id="exampleInputFile" name="fileMattruoc">
+									<label class="custom-file-label" for="exampleInputFile">Ảnh mặt trước</label>
+								</div>
+								<div class="input-group-append">
+									<span class="input-group-text" id="">Tải lên</span>
+								</div>
+							</div>
+							<div class="input-group" style="margin-top: 10px;">
+								<div class="custom-file" style="display: block;">
+									<input type="file" class="custom-file-input" id="exampleInputFile1" name="fileMatSau">
+									<label class="custom-file-label" for="exampleInputFile1">Ảnh mặt sau</label>
 								</div>
 								<div class="input-group-append">
 									<span class="input-group-text" id="">Tải lên</span>
@@ -54,7 +63,8 @@
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Tải ảnh</button>
+						<a href="/dang-ky-xac-thuc" class="btn btn-default">Quay lại</a>
+						<button type="submit" class="btn btn-primary">Đọc dữ liệu căn cước</button>
 					</div>
 				</form>
 			</div>
@@ -69,7 +79,11 @@ $(document).ready(function () {
   	bsCustomFileInput.init();
   	$("#quickForm").submit(function(e){
   		if($("#exampleInputFile").val() == "") {
-  			alertER("Chọn file cần tải");
+  			alertER("Tải lên ảnh mặt trước căn cước công dân");
+  			e.preventDefault();
+  		}
+  		if($("#exampleInputFile1").val() == "") {
+  			alertER("Tải lên ảnh mặt sau căn cước công dân");
   			e.preventDefault();
   		}
   	});

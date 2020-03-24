@@ -1,6 +1,7 @@
 package fis.com.vn.controller;
 
 import java.nio.charset.Charset;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,12 +18,15 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.fis.faceid.FaceID;
 import com.google.gson.Gson;
 
 import fis.com.vn.common.Common;
+import fis.com.vn.entities.FaceId;
 import fis.com.vn.midpoint.Activation;
 import fis.com.vn.midpoint.Assignment;
 import fis.com.vn.midpoint.Credentials;
@@ -31,8 +35,10 @@ import fis.com.vn.midpoint.ParamsUser;
 import fis.com.vn.midpoint.Password;
 import fis.com.vn.midpoint.TargetRef;
 import fis.com.vn.midpoint.User;
+import fis.com.vn.repository.MUserImageRepository;
 import fis.com.vn.repository.MUserRepository;
 import fis.com.vn.resp.Resp;
+import fis.com.vn.table.MUserImage;
 
 @Controller
 public class RegisterController extends BaseController{
@@ -41,14 +47,23 @@ public class RegisterController extends BaseController{
 	
 	@Autowired
 	MUserRepository mUserRepository;
+	@Autowired
+	MUserImageRepository mUserImageRepository;
 	
-	@PostMapping(value = "/api/register", produces = "text/plain;charset=UTF-8")
+	@PostMapping(value = "/api/register")
 	@ResponseBody
-	public String register(HttpServletRequest req,@RequestBody ParamsUser paramsUser) {
+	public String register(HttpServletRequest req, @RequestParam Map<String, String> allParams) {
 		Resp resp = new Resp();
+		
+		ParamsUser paramsUser = new Gson().fromJson(allParams.get("json"), ParamsUser.class);
+		
 		JsonUser user = createUserInsert(paramsUser);
+		
 		int check = insertToApiMidPoint(new Gson().toJson(user));
 		if(check == 201) {
+			saveImage(allParams, user.getUser().getOid());
+			
+			
 			mUserRepository.update(Common.getMD5(paramsUser.getPassword()), paramsUser.getPhone(), user.getUser().getOid());
 			resp.setStatusCode(HttpStatus.OK.value());
 			resp.setData(new Gson().toJson(user));
@@ -60,6 +75,30 @@ public class RegisterController extends BaseController{
 		return new Gson().toJson(resp);
 	}
 	
+	private void saveImage(Map<String, String> allParams, String userOid) {
+		MUserImage mUserImage = new MUserImage();
+		mUserImage.setUserOid(userOid);
+		mUserImage.setOid(UUID.randomUUID().toString());
+		mUserImage.setImage(allParams.get("file1").getBytes());
+		
+		mUserImageRepository.save(mUserImage);
+		
+		mUserImage = new MUserImage();
+		mUserImage.setUserOid(userOid);
+		mUserImage.setOid(UUID.randomUUID().toString());
+		mUserImage.setImage(allParams.get("file2").getBytes());
+		
+		mUserImageRepository.save(mUserImage);
+		
+		mUserImage = new MUserImage();
+		mUserImage.setUserOid(userOid);
+		mUserImage.setOid(UUID.randomUUID().toString());
+		mUserImage.setImage(allParams.get("file3").getBytes());
+		
+		mUserImageRepository.save(mUserImage);
+		
+	}
+
 	public JsonUser createUserInsert(ParamsUser paramsUser) {
 		JsonUser jsonUser = new JsonUser();
 		User user = new User();

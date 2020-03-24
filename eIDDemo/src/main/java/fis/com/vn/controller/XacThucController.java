@@ -71,7 +71,7 @@ public class XacThucController extends BaseController{
 		if(type.equals(Contains.OCR)) {
 			return "redirect:/xac-thuc/xac-thuc-ocr";
 		} else if(type.equals(Contains.OTP)) {
-			return "redirect:/xac-thuc/xac-thuc-otp";
+			return "redirect:/xac-thuc/gui-ma-otp";
 		} else if(type.equals(Contains.CHU_KY_SO)) {
 			return "redirect:/xac-thuc/xac-thuc-ca";
 		} else if(type.equals(Contains.FACE_ID)) {

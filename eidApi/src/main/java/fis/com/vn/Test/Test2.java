@@ -1,27 +1,40 @@
 package fis.com.vn.Test;
 
-import java.nio.charset.Charset;
+import com.fis.faceid.FaceID;
+import com.fis.ocr.OCRParser;
+import org.apache.commons.io.IOUtils;
+import vn.com.fis.esigncloud.eSignDemo;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.rmi.ServerError;
 
 public class Test2 {
-	public static void main(String[] args) {
-		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.add("Authorization", "Basic IGFkbWluaXN0cmF0b3I6NWVjcjN0");
-		String json = "{ \"user\" : { \"oid\" : \"3ad70e14-c14b-4ff5-9a65-d9cc1466ee11\", \"name\" : \"administrator7\", \"assignment\" : { \"targetRef\" : { \"oid\" : \"00000000-0000-0000-0000-000000000004\" } }, \"activation\" : { \"administrativeStatus\" : \"enabled\" }, \"fullName\" : \"midPoint Administrator1\", \"givenName\" : \"midPoint1\", \"familyName\" : \"Administrato1r\", \"title\" : \"title\", \"credentials\" : { \"password\" : { \"value\" : { \"clearValue\" : \"5ecr3t\" } } } } }";
-		
-		String url = "http://localhost:8080/midpoint/ws/rest/users";
-		HttpEntity<String> entity = new HttpEntity<String>(json, headers);
-		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-		System.out.println(response.getStatusCodeValue());
-	}
+	final public static String agreementUUID = "202003042228"; //
+    final public static String pwd = "25585901";
+
+    final public static String FILE_XML = "test.xml";
+    final public static String FILE_PDF = "license.pdf";
+
+    final public static String FILE_PDF_01 = "test01.pdf";
+    final public static String FILE_PDF_02 = "test02.pdf";
+
+
+    public static void main(String[] args) throws Exception {
+//        byte[] xmlBinary = IOUtils.toByteArray(new FileInputStream("C:\\Users\\vdc\\Downloads\\file\\test.xml"));
+//        String xmlData = new String(xmlBinary, "UTF-8");
+//        byte[] signed = eSignDemo.signXmlUsingPassCode(agreementUUID, xmlData, pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
+//        IOUtils.write(signed, new FileOutputStream(new File("C:\\Users\\vdc\\Downloads\\file\\xml_signed.xml")));
+//
+//        // sign file pdf
+//        byte[] pdfBinary = IOUtils.toByteArray(new FileInputStream("C:\\Users\\vdc\\Downloads\\file\\test.pdf"));
+//        byte[] signedPdf = eSignDemo.signPdfUsingPassCode(agreementUUID, pdfBinary, pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
+//        IOUtils.write(signedPdf, new FileOutputStream(new File("C:\\Users\\vdc\\Downloads\\file\\pdf_signed.pdf")));
+
+        // Face ID ;
+        String imageBase64 = OCRParser.encodeFileToBase64Binary(new File("C:\\Users\\vdc\\Downloads\\imgpsh_fullsize_anim.jpg"));
+        System.out.println(imageBase64);
+        System.err.println(FaceID.faceRecognition(imageBase64));
+    }
 }
