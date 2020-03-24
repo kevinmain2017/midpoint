@@ -47,8 +47,16 @@ public class ChuKySoController extends BaseController{
 	
 	@PostMapping(value = "/xac-thuc/xac-thuc-ca")
 	public String postXacThucOcr2(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-		String url = origin + Contains.URL_KY_SO+"?user_oid="+getOid(req)+"&type_code="+Contains.CHU_KY_SO+"&type_file="+FilenameUtils.getExtension(file.getOriginalFilename());
-		String json = Request.postFile("", this.getAuthorizationToken(req), url, file);
+		String typeFile = FilenameUtils.getExtension(file.getOriginalFilename());
+		
+		String url = origin + Contains.URL_KY_SO+"?user_oid="+getOid(req)+"&type_code="+Contains.CHU_KY_SO+"&type_file="+typeFile;
+		
+		String json = null;
+		if(typeFile.equals("pdf")) {
+			json = Request.postFileEncode("", this.getAuthorizationToken(req), url, file);
+		} else if( typeFile.equals("xml")){
+			json = Request.postFile("", this.getAuthorizationToken(req), url, file);
+		}
 		
 		if(Request.getStatus(json) == 200) {
 			redirectAttributes.addFlashAttribute("success", "Xác thực chữ ký số thành công");

@@ -72,14 +72,23 @@ $(document).ready(function () {
   			alertER("Chọn file cần tải");
   			e.preventDefault();
   		}
+  		if(!checkExFile($(this))) {
+  			e.preventDefault();
+  		}
   	});
   	
   	$("#exampleInputFile").change(function () {
-        var fileExtension = ['xml', 'pdf'];
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-        	alertER("Bạn chỉ có thể chọn file : "+fileExtension.join(', '));
-        }
+  		checkExFile($(this));
     });
+  	
+  	function checkExFile(obj) {
+  		var fileExtension = ['xml', 'pdf'];
+        if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        	alertER("Bạn chỉ có thể chọn file : "+fileExtension.join(', '));
+        	return false;
+        }
+        return true;
+  	}
 });
 
 </script>

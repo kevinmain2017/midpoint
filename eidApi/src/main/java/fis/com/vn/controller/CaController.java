@@ -55,7 +55,7 @@ public class CaController extends BaseController{
 	
 	@PostMapping(value = "/api/digital-signatures")
 	@ResponseBody
-	public String validOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams, @RequestParam("file") byte[] file) {
+	public String validOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams, @RequestParam(name="file", required=false) byte[] file) {
 		Resp resp = new Resp();
 		
 		if(checkCa(file, allParams)) {
@@ -73,13 +73,13 @@ public class CaController extends BaseController{
 			MUserType mUserTypeDb = mUserTypeRepository.findByUserOidAndTypeCode(allParams.get("user_oid"), allParams.get("type_code"));
 			
 			System.out.println(allParams.get("type_file"));
-			String xmlData = new String(file, "UTF-8");
+			
 	        byte[] signed = null;
 	        if(allParams.get("type_file").equals("xml")) {
-	        	
+	        	String xmlData = new String(file, "UTF-8");
 	        	signed = eSignDemo.signXmlUsingPassCode(mUserTypeDb.getInfo(), xmlData, pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
 	        } else if(allParams.get("type_file").equals("pdf")) {
-	        	signed = eSignDemo.signPdfUsingPassCode(mUserTypeDb.getInfo(), xmlData.getBytes("utf-8"), pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
+	        	signed = eSignDemo.signPdfUsingPassCode(mUserTypeDb.getInfo(), allParams.get("file"), pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
 	        }
 	        if(signed != null) {
 	        	return true;
