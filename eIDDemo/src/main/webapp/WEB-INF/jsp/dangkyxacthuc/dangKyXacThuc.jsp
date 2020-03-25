@@ -39,30 +39,38 @@
 				<form role="form" id="quickForm" method="get"
 					action="${contextPath }/dang-ky-xac-thuc/dieu-huong">
 					<div class="card-body">
-						<c:if test="${fn:length(mTypes) ne fn:length(mTypeRegisters) }">
-							<div class="form-group">
-								<select class="form-control" name="type">
-									<c:forEach items="${mTypes }" var="item">
-										<c:set var="check" value="0"></c:set>
-										<c:forEach items="${mTypeRegisters }" var="it">
-											<c:if test="${item.code eq it.code }">
-												<c:set var="check" value="1"></c:set>
-											</c:if>
-										</c:forEach>
-										<c:if test="${check eq 0 }">
-											<option value="${item.code }">${item.name }</option>
-										</c:if>
-									</c:forEach>
-								</select>
-							</div>
-						</c:if>
-						<c:if test="${fn:length(mTypes) eq fn:length(mTypeRegisters) }">
-							Không còn phương thức xác thực
-						</c:if>
-					</div>
-					<!-- /.card-body -->
-					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Đăng ký</button>
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Tên loại hình xác thực</th>
+									<th scope="col">Đăng ký</th>
+									<th scope="col" style="width: 100px;"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${mTypes }" var="item" varStatus="status">
+									<tr>
+										<th scope="row">${status.index+1 }</th>
+										<td>${item.name }</td>
+										<td>
+											<c:set var="check" value="0"></c:set>
+											<c:forEach items="${mTypeRegisters }" var="it">
+												<c:if test="${item.code eq it.code }">
+													<c:set var="check" value="1"></c:set>
+												</c:if>
+											</c:forEach>
+											<input type="checkbox" value="${item.code }" <c:if test="${check eq 1 }">checked="checked"</c:if> disabled="disabled"/>
+										</td>
+										<td>
+											<a href="javascript:void(0)" onclick="register('/dang-ky-xac-thuc/dk?code=${item.code }', '${item.code }')"><i class="fas fa-registered"></i></a>
+											<a href="javascript:void(0)" onclick="deleteRC('/dang-ky-xac-thuc/huy?code=${item.code }')" style="margin-left: 10px;"><i class="fas fa-trash"></i></a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+							
+						</table>
 					</div>
 				</form>
 			</div>
@@ -71,6 +79,44 @@
 	</section>
 	<!-- /.content -->
 </div>
+<script type="text/javascript">
+function register(url, code) {
+	if(code == 'faceid' || code=='ocr') {
+		alertRC(url, "Bạn có muốn đăng ký loại hình xác thực này?");
+	} else if(code=='ca'){
+		swal({
+			  title: "",
+			  text: "Nhập vào seria chữ ký số",
+			  type: "input",
+			  showCancelButton: true,
+			  closeOnConfirm: false,
+			  inputPlaceholder: "Nhập vào seria chữ ký số"
+			}, function (inputValue) {
+			  if (inputValue === false) return false;
+			  if (inputValue === "") {
+			    swal.showInputError("Nhập vào seria chữ ký số!");
+			    return false
+			  }
+			  location.href=url+"&info="+inputValue;
+			});
+	} else if(code='otp'){
+		swal({
+		  title: "",
+		  text: "Nhập vào số điện thoại cần xác thực",
+		  type: "input",
+		  showCancelButton: true,
+		  closeOnConfirm: false,
+		  inputPlaceholder: "Nhập vào số điện thoại cần xác thực"
+		}, function (inputValue) {
+		  if (inputValue === false) return false;
+		  if (inputValue === "") {
+		    swal.showInputError("Nhập vào số điện thoại cần xác thực!");
+		    return false
+		  }
+		  location.href=url+"&info="+inputValue;
+		});
+	}
+}
+</script>
 <!-- /.content-wrapper -->
-
 <%@include file="../layout/footer.jsp"%>

@@ -52,19 +52,15 @@ public class RegisterController extends BaseController{
 	
 	@PostMapping(value = "/api/register")
 	@ResponseBody
-	public String register(HttpServletRequest req, @RequestParam Map<String, String> allParams) {
+	public String register(HttpServletRequest req, @RequestBody ParamsUser paramsUser) {
 		Resp resp = new Resp();
-		
-		ParamsUser paramsUser = new Gson().fromJson(allParams.get("json"), ParamsUser.class);
 		
 		JsonUser user = createUserInsert(paramsUser);
 		
 		int check = insertToApiMidPoint(new Gson().toJson(user));
 		if(check == 201) {
-			saveImage(allParams, user.getUser().getOid());
+//			saveImage(allParams, user.getUser().getOid());
 			
-			
-			mUserRepository.update(Common.getMD5(paramsUser.getPassword()), paramsUser.getPhone(), user.getUser().getOid());
 			resp.setStatusCode(HttpStatus.OK.value());
 			resp.setData(new Gson().toJson(user));
 		} else {
@@ -124,6 +120,9 @@ public class RegisterController extends BaseController{
 		user.setGivenName("");
 		user.setFamilyName("");
 		user.setTitle("");
+		user.setAddress(paramsUser.getAddress());
+		user.setPhone(paramsUser.getPhone());
+//		user.setNumberCardId(paramsUser.getId());
 		jsonUser.setUser(user);
 		return jsonUser;
 	}

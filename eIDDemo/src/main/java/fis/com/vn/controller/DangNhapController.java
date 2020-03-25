@@ -43,6 +43,7 @@ public class DangNhapController extends BaseController{
 				model.addAttribute("error", "Sai tên đăng nhập hoặc mật khẩu");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			model.addAttribute("error", "Lỗi api");
 		}
 		

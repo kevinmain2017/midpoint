@@ -78,7 +78,7 @@ function alertER(msg) {
     });
 }
 function deleteRC(url) {
-	alertRC(url, "Bạn có chắc muốn xóa?");
+	alertRC(url, "Bạn có chắc muốn hủy đăng ký?");
 }
 function change(url) {
 	alertRC(url, "Bạn có chắc muốn thay đổi?");

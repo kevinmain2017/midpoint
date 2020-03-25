@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.google.gson.reflect.TypeToken;
@@ -55,6 +56,49 @@ public class DangKyXacThucController extends BaseController{
 		return "dangkyxacthuc/dangKyXacThuc";
 	}
 	
+	@GetMapping(value = "/dang-ky-xac-thuc/dk")
+	public String dangKy(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams, RedirectAttributes redirectAttributes) {
+		
+		try {
+			UriComponentsBuilder builderChitieuTemplate = UriComponentsBuilder.fromHttpUrl(origin + Contains.URL_DANG_KY_XAC_THUC)
+					.queryParam("user_oid", getOid(req))
+					.queryParam("info", allParams.getOrDefault("info", ""))
+					.queryParam("type_code", allParams.get("code"))
+					;
+			String json = Request.get(builderChitieuTemplate,this.getAuthorizationToken(req));
+			if(Request.getStatus(json) == 200) {
+				redirectAttributes.addFlashAttribute("success", "Đăng ký xác thực thành công");
+			} else {
+				redirectAttributes.addFlashAttribute("error", "Lỗi đăng ký");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		forwardParams(model, allParams);
+		return "redirect:/dang-ky-xac-thuc";
+	}
+	@GetMapping(value = "/dang-ky-xac-thuc/huy")
+	public String huy(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams, RedirectAttributes redirectAttributes) {
+		
+		try {
+			UriComponentsBuilder builderChitieuTemplate = UriComponentsBuilder.fromHttpUrl(origin + Contains.URL_HUY_DANG_KY_XAC_THUC)
+					.queryParam("user_oid", getOid(req))
+					.queryParam("type_code", allParams.get("code"))
+					;
+			String json = Request.get(builderChitieuTemplate,this.getAuthorizationToken(req));
+			if(Request.getStatus(json) == 200) {
+				redirectAttributes.addFlashAttribute("success", "Hủy đăng ký xác thực thành công");
+			} else {
+				redirectAttributes.addFlashAttribute("error", "Lỗi hủy đăng ký");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		forwardParams(model, allParams);
+		return "redirect:/dang-ky-xac-thuc";
+	}
 	
 	
 	@GetMapping(value = "/dang-ky-xac-thuc/dieu-huong")

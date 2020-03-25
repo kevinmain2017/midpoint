@@ -41,12 +41,11 @@
 					<div class="card-body">
 						<div class="form-group">
 							<label for="exampleInputFile">Nhập số điện thoại</label>
-							<input type="text" class="form-control" id="exampleInputFile" name="phone">
+							<input type="text" class="form-control" id="exampleInputFile" name="phone" value="${phone }">
 						</div>
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<a href="/dang-ky-xac-thuc" class="btn btn-default">Quay lại</a>
 						<button type="submit" class="btn btn-primary">Gửi mã OTP</button>
 					</div>
 				</form>

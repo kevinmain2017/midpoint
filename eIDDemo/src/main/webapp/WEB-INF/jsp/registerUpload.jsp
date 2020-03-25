@@ -47,13 +47,13 @@
 	
 		<div class="card">
 			<div class="card-body register-card-body">
-				<form action="${contentPath }/register/detect" method="post" id="quickForm" enctype="multipart/form-data">
+				<form action="${contentPath }/register/upload-training" method="post" id="quickForm" enctype="multipart/form-data">
 					
-					<i><b>Yêu cầu:</b> Tải lên ảnh mặt trước và mặt sau căn cước công dân</i>
+					<i><b>Yêu cầu:</b> Tải lên 3 ảnh cá nhân rõ mặt</i>
 					<div class="input-group mb-3" style="margin-top: 10px;">
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="exampleInputFile" name="fileMattruoc">
-							<label class="custom-file-label" for="exampleInputFile">Ảnh mặt trước</label>
+							<input type="file" class="custom-file-input" id="exampleInputFile" name="file1">
+							<label class="custom-file-label" for="exampleInputFile">Ảnh 1</label>
 						</div>
 						<div class="input-group-append">
 							<span class="input-group-text" id="">Tải lên</span>
@@ -61,8 +61,17 @@
 					</div>
 					<div class="input-group mb-3">
 						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="exampleInputFile2" name="fileMatSau">
-							<label class="custom-file-label" for="exampleInputFile2">Ảnh mặt sau</label>
+							<input type="file" class="custom-file-input" id="exampleInputFile2" name="file2">
+							<label class="custom-file-label" for="exampleInputFile2">Ảnh 2</label>
+						</div>
+						<div class="input-group-append">
+							<span class="input-group-text" id="">Tải lên</span>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="exampleInputFile3" name="file3">
+							<label class="custom-file-label" for="exampleInputFile3">Ảnh 3</label>
 						</div>
 						<div class="input-group-append">
 							<span class="input-group-text" id="">Tải lên</span>
@@ -89,8 +98,8 @@
 	$(document).ready(function () {
 		bsCustomFileInput.init();
 	  	$("#quickForm").submit(function(e){
-	  		if($("#exampleInputFile").val() == "" || $("#exampleInputFile3").val() == "") {
-	  			alertER("Tải lên ảnh mặt trước, mặt sau căn cước công dân");
+	  		if($("#exampleInputFile").val() == "" || $("#exampleInputFile3").val() == ""|| $("#exampleInputFile2").val() == "") {
+	  			alertER("Tải lên 3 ảnh cá nhân rõ mặt");
 	  			e.preventDefault();
 	  		}
 	  	});

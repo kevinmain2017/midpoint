@@ -45,8 +45,8 @@ public class OTPController extends BaseController{
 			String json = Request.get(builder, this.getAuthorizationToken(req));
 			
 			if(Request.getStatus(json) == 200) {
-				MUser mUser = Request.getList(json, MUser.class, "data");
-				model.addAttribute("phone", mUser.getPhone());
+				String phone = Request.getAttrFromJson(json, "data");
+				model.addAttribute("phone", phone);
 			}
 		} catch (Exception e) {
 		} 

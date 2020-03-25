@@ -41,9 +41,9 @@ public class OTPController extends BaseController{
 		Resp resp = new Resp();
 		
 		try {
-			MUser mUser = mUserRepository.findByOid(allParams.get("oid"));
+			MUserType mUserTypeDb = mUserTypeRepository.findByUserOidAndTypeCode(allParams.get("user_oid"), allParams.get("type_code"));
 			
-			resp.setData(mUser);
+			resp.setData(mUserTypeDb.getInfo());
 			resp.setStatusCode(HttpStatus.OK.value());
 		} catch (Exception e) {
 			resp.setMsg("Lỗi api");
@@ -59,18 +59,10 @@ public class OTPController extends BaseController{
 		Resp resp = new Resp();
 		
 		try {
-			int code = randomNumber(1000, 9999);
-			
-			SendSMS.smsFpt("0984707337", "Test message "+code);
-			
-			resp.setData(code);
-			resp.setStatusCode(HttpStatus.OK.value());
-		} catch (Exception e) {
-			e.printStackTrace();
-
-		try {
 			String phone = allParams.get("phone");
 			int code = randomNumber(1000, 9999);
+			
+			SendSMS.smsFpt(phone, "Test message "+code);
 			
 			resp.setData(code);
 			resp.setStatusCode(HttpStatus.OK.value());

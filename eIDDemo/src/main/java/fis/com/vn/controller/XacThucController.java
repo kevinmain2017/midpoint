@@ -22,6 +22,14 @@ import fis.com.vn.table.MType;
 
 @Controller
 public class XacThucController extends BaseController{
+	@GetMapping(value = "/muc-xac-thuc")
+	public String mucDangKyXacThuc(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams) {
+		req.getSession().removeAttribute("typeSaves");
+	
+		forwardParams(model, allParams);
+		return "xacthuc/mucXacThuc";
+	}
+	
 	@GetMapping(value = "/xac-thuc")
 	public String dangKyXacThuc(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams) {
 		req.getSession().removeAttribute("typeSaves");

@@ -1,3 +1,4 @@
+fis\com\vn\entities\FaceIdInfo.class
 fis\com\vn\midpoint\Credentials.class
 fis\com\vn\entities\OCRField.class
 fis\com\vn\midpoint\TargetRef.class
@@ -7,9 +8,11 @@ share\share\App.class
 fis\com\vn\midpoint\Activation.class
 fis\com\vn\resp\Resp.class
 fis\com\vn\table\MUser.class
+fis\com\vn\table\MUserImage.class
 fis\com\vn\table\MType.class
 fis\com\vn\midpoint\User.class
 fis\com\vn\midpoint\Value.class
 fis\com\vn\table\MUserType.class
 fis\com\vn\midpoint\Assignment.class
 fis\com\vn\midpoint\ParamsUser.class
+fis\com\vn\entities\FaceId.class

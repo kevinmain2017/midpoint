@@ -9,6 +9,8 @@ public class Contains {
 	public final static String URL_DANH_SACH_XAC_THUC = PATH_API + "list-type";
 	public final static String URL_XOA_XAC_THUC = PATH_API + "delete-user-type";
 	public final static String URL_LY_THONG_TIN_OCR = PATH_API + "get-info-ocr";
+	public final static String URL_DANG_KY_XAC_THUC = PATH_API + "active";
+	public final static String URL_HUY_DANG_KY_XAC_THUC = PATH_API + "reactive";
 	public final static String URL_DOI_CHIEU_THONG_TIN_OCR = PATH_API + "valid-ocr";
 	public static final String URL_DOI_CHIEU_THONG_TIN_OTP = PATH_API + "valid-otp";
 	public static final String URL_LAY_MA_OTP = PATH_API + "get-code-otp";

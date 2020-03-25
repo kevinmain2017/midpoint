@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,9 +34,10 @@ public class OcrController {
 		Resp resp = new Resp();
 		
 		try {
+			
 			OCRParser parser = new OCRParser();
 	        String jsonOcr = parser.parsingToJson(allParams.get("fileMattruoc"), allParams.get("fileMatSau"));
-			
+			System.out.println("jsonOcr:"+jsonOcr);
 	        OCRField ocrField = new Gson().fromJson(jsonOcr, OCRField.class);
 			resp.setData(ocrField);
 			resp.setStatusCode(HttpStatus.OK.value());
@@ -46,6 +48,7 @@ public class OcrController {
 		}
 		return new Gson().toJson(resp);
 	}
+	
 	
 	@PostMapping(value = "/api/valid-ocr")
 	@ResponseBody

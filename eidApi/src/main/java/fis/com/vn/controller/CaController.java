@@ -70,16 +70,16 @@ public class CaController extends BaseController{
 	}
 	public Boolean checkCa(byte[] file, Map<String, String> allParams) {
 		try {
-			MUserType mUserTypeDb = mUserTypeRepository.findByUserOidAndTypeCode(allParams.get("user_oid"), allParams.get("type_code"));
+//			MUserType mUserTypeDb = mUserTypeRepository.findByUserOidAndTypeCode(allParams.get("user_oid"), allParams.get("type_code"));
 			
 			System.out.println(allParams.get("type_file"));
 			
 	        byte[] signed = null;
 	        if(allParams.get("type_file").equals("xml")) {
 	        	String xmlData = new String(file, "UTF-8");
-	        	signed = eSignDemo.signXmlUsingPassCode(mUserTypeDb.getInfo(), xmlData, pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
+	        	signed = eSignDemo.signXmlUsingPassCode(agreementUUID, xmlData, pwd, "C:\\Users\\Administrator\\Desktop\\eSignCloud.p12");
 	        } else if(allParams.get("type_file").equals("pdf")) {
-	        	signed = eSignDemo.signPdfUsingPassCode(mUserTypeDb.getInfo(), allParams.get("file"), pwd, "C:\\Users\\vdc\\Downloads\\file\\eSignCloud.p12");
+	        	signed = eSignDemo.signPdfUsingPassCode(agreementUUID, allParams.get("file"), pwd, "C:\\Users\\Administrator\\Desktop\\eSignCloud.p12");
 	        }
 	        if(signed != null) {
 	        	return true;

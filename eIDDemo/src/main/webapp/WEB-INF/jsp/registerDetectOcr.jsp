@@ -44,29 +44,42 @@
 		<div class="register-logo">
 			<a href="/login"><b>Admin</b>EID</a>
 		</div>
-	
 		<div class="card">
 			<div class="card-body register-card-body">
-				<form action="${contentPath }/register/detect" method="post" id="quickForm" enctype="multipart/form-data">
+				<form action="${contextPath}/register/upload" method="post" id="quickForm" enctype="multipart/form-data">
 					
-					<i><b>Yêu cầu:</b> Tải lên ảnh mặt trước và mặt sau căn cước công dân</i>
-					<div class="input-group mb-3" style="margin-top: 10px;">
-						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="exampleInputFile" name="fileMattruoc">
-							<label class="custom-file-label" for="exampleInputFile">Ảnh mặt trước</label>
-						</div>
-						<div class="input-group-append">
-							<span class="input-group-text" id="">Tải lên</span>
-						</div>
+					<i>Xác nhận thông tin</i>
+					<div class="form-group">
+						<label for="hoTen">Họ và tên</label>
+						<input type="text" class="form-control" id="hoTen" value="${oCRField.name }" name="name">
 					</div>
-					<div class="input-group mb-3">
-						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="exampleInputFile2" name="fileMatSau">
-							<label class="custom-file-label" for="exampleInputFile2">Ảnh mặt sau</label>
-						</div>
-						<div class="input-group-append">
-							<span class="input-group-text" id="">Tải lên</span>
-						</div>
+					<div class="form-group">
+						<label for="soCMT">Số CMT</label>
+						<input type="text" class="form-control" id="soCMT" value="${oCRField.id }" name="id">
+					</div>
+					<div class="form-group">
+						<label for="ngayThang">Ngày tháng năm sinh</label>
+						<input type="text" class="form-control" id="ngayThang" value="${oCRField.dob }" name="dob">
+					</div>
+					<div class="form-group">
+						<label for="gioiTinh">Giới tính</label>
+						<input type="text" class="form-control" id="gioiTinh" value="${oCRField.sex }" name="sex">
+					</div>
+					<div class="form-group">
+						<label for="danToc">Dân tộc</label>
+						<input type="text" class="form-control" id="danToc" value="${oCRField.ethnicity }" name="ethnicity">
+					</div>
+					<div class="form-group">
+						<label for="queQuan">Quê quán</label>
+						<input type="text" class="form-control" id="queQuan" value="${oCRField.home }" name="home">
+					</div>
+					<div class="form-group">
+						<label for="noiTru">Nơi trú</label>
+						<input type="text" class="form-control" id="noiTru" value="${oCRField.address }" name="address">
+					</div>
+					<div class="form-group">
+						<label for="tonGiao">Tôn giáo</label>
+						<input type="text" class="form-control" id="tonGiao" value="${oCRField.religion }" name="religion">
 					</div>
 					
 					<div class="row">

@@ -53,6 +53,7 @@ public class EidFilter extends GenericFilterBean{
 		listAllow.add("/logout");
 		listAllow.add("/static/file/*");
 		listAllow.add("/register");
+		listAllow.add("/register/*");
 		listAllow.add("/dist/*");
 		listAllow.add("/plugins/*");
 		listAllow.add("/docs/*");

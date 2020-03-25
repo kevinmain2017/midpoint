@@ -44,34 +44,39 @@
 		<div class="register-logo">
 			<a href="/login"><b>Admin</b>EID</a>
 		</div>
-	
+
 		<div class="card">
 			<div class="card-body register-card-body">
-				<form action="${contentPath }/register/detect" method="post" id="quickForm" enctype="multipart/form-data">
-					
-					<i><b>Yêu cầu:</b> Tải lên ảnh mặt trước và mặt sau căn cước công dân</i>
-					<div class="input-group mb-3" style="margin-top: 10px;">
-						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="exampleInputFile" name="fileMattruoc">
-							<label class="custom-file-label" for="exampleInputFile">Ảnh mặt trước</label>
-						</div>
+				<p class="login-box-msg">Đăng ký thành viên</p>
+				<form action="${contextPath}/register" method="post" id="quickForm" enctype="multipart/form-data">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" placeholder="Số điện thoại" name="phone" id="phone">
 						<div class="input-group-append">
-							<span class="input-group-text" id="">Tải lên</span>
+							<div class="input-group-text">
+								<span class="fas fa-phone"></span>
+							</div>
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="exampleInputFile2" name="fileMatSau">
-							<label class="custom-file-label" for="exampleInputFile2">Ảnh mặt sau</label>
-						</div>
+						<input type="text" class="form-control" placeholder="Tên đăng nhập" name="name" id='name'>
 						<div class="input-group-append">
-							<span class="input-group-text" id="">Tải lên</span>
+							<div class="input-group-text">
+								<span class="fas fa-user"></span>
+							</div>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="password"/>
+						<div class="input-group-append">
+							<div class="input-group-text">
+								<span class="fas fa-lock"></span>
+							</div>
 						</div>
 					</div>
 					
 					<div class="row">
 						<div class="col-12">
-							<button type="submit" class="btn btn-primary btn-block">Tiếp tục</button>
+							<button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
 						</div>
 						<!-- /.col -->
 					</div>
@@ -89,8 +94,16 @@
 	$(document).ready(function () {
 		bsCustomFileInput.init();
 	  	$("#quickForm").submit(function(e){
-	  		if($("#exampleInputFile").val() == "" || $("#exampleInputFile3").val() == "") {
-	  			alertER("Tải lên ảnh mặt trước, mặt sau căn cước công dân");
+	  		if($("#phone").val() == "") {
+	  			alertER("Nhập vào số điện thoại của bạn");
+	  			e.preventDefault();
+	  		}
+	  		if($("#name").val() == "") {
+	  			alertER("Nhập vào tên đăng nhập của bạn");
+	  			e.preventDefault();
+	  		}
+	  		if($("#password").val() == "") {
+	  			alertER("Nhập vào mật khẩu của bạn");
 	  			e.preventDefault();
 	  		}
 	  	});
