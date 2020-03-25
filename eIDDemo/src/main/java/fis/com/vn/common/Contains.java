@@ -12,8 +12,10 @@ public class Contains {
 	public final static String URL_DOI_CHIEU_THONG_TIN_OCR = PATH_API + "valid-ocr";
 	public static final String URL_DOI_CHIEU_THONG_TIN_OTP = PATH_API + "valid-otp";
 	public static final String URL_LAY_MA_OTP = PATH_API + "get-code-otp";
+	public static final String URL_LAY_SO_DT_OTP = PATH_API + "get-phone-user";
 	public final static String URL_DOI_CHIEU_THONG_TIN_FACE_ID = PATH_API + "valid-face-id";
 	public static final String URL_KY_SO = PATH_API + "digital-signatures";
+	public static final String URL_DANG_KY_KY_SO = PATH_API + "digital-signatures-register";
 	
 	//Loai xac thuc
 	public final static String OCR = "ocr";

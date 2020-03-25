@@ -29,34 +29,39 @@ public class OCRController extends BaseController{
 		return "xacthuc/ocr/xacThucOcr";
 	}
 	@PostMapping(value = "/dang-ky-xac-thuc/xac-thuc-ocr")
-	public String postXacThucOcr(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile[] file) {		
-		boolean check = xacThucOcr(model, req, file);
+	public String postXacThucOcr(Model model, HttpServletRequest req, @RequestParam("fileMattruoc") MultipartFile fileMattruoc , @RequestParam("fileMatSau") MultipartFile fileMatSau) {		
+		boolean check = xacThucOcr(model, req, fileMattruoc, fileMatSau);
 		if(check) {
 			return "dangkyxacthuc/ocr/kiemTraThongTinOcr";
 		}
 		
-		return "redirect:/dang-ky-xac-thuc/xac-thuc-ocr";
+		return "dangkyxacthuc/ocr/xacThucOcr";
 	}
 	@PostMapping(value = "/xac-thuc/xac-thuc-ocr")
-	public String postXacThucOcr2(Model model, HttpServletRequest req, @RequestParam("file") MultipartFile[] file) {		
-		boolean check = xacThucOcr(model, req, file);
+	public String postXacThucOcr2(Model model, HttpServletRequest req, @RequestParam("fileMattruoc") MultipartFile fileMattruoc , @RequestParam("fileMatSau") MultipartFile fileMatSau) {		
+		boolean check = xacThucOcr(model, req, fileMattruoc, fileMatSau);
 		if(check) {
 			return "xacthuc/ocr/kiemTraThongTinOcr";
 		}
 		
-		return "redirect:/xac-thuc/xac-thuc-ocr";
+		return "xacthuc/ocr/xacThucOcr";
 	}
-	public boolean xacThucOcr(Model model, HttpServletRequest req,MultipartFile[] file) {
-		String json = Request.postFile("json", this.getAuthorizationToken(req), origin + Contains.URL_LY_THONG_TIN_OCR, file);
+	public boolean xacThucOcr(Model model, HttpServletRequest req, MultipartFile fileMattruoc, MultipartFile fileMatSau) {
+		String json = Request.postFile("json", this.getAuthorizationToken(req), origin + Contains.URL_LY_THONG_TIN_OCR, fileMattruoc, fileMatSau);
 		
 		if(Request.getStatus(json) == 200) {
 			OCRField oCRField = Request.getList(json, OCRField.class, "data");
+			
+			if(oCRField == null || oCRField != null && oCRField.getName()==null) {
+				model.addAttribute("error", "Lỗi đọc dữ liệu từ ảnh, hãy đảm bảo chất lượng và đúng vị trí ảnh.");
+				return false;
+			}
 			
 			model.addAttribute("oCRField", oCRField);
 			
 			return true;
 		} else {
-			model.addAttribute("error", "Lỗi api");
+			model.addAttribute("error", Request.getMessage(json));
 		}
 		return false;
 	}
@@ -68,7 +73,7 @@ public class OCRController extends BaseController{
 			return "dangkyxacthuc/ocr/thanhCongOcr";
 		}
 		
-		return "redirect:/xac-thuc/xac-thuc-ocr";
+		return "redirect:/dang-ky-xac-thuc/xac-thuc-ocr";
 	}
 	@PostMapping(value = "/xac-thuc/doi-chieu-ocr")
 	public String postDoiChieuOcr2(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams, RedirectAttributes attributes) {

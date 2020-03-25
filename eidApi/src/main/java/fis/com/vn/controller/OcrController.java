@@ -32,12 +32,18 @@ public class OcrController {
 	public String getInfoOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams) {
 		Resp resp = new Resp();
 		
-		OCRParser parser = new OCRParser();
-        String jsonOcr = parser.parsingToJson(allParams.get("file2"), allParams.get("file1"));
-		
-        OCRField ocrField = new Gson().fromJson(jsonOcr, OCRField.class);
-		resp.setData(ocrField);
-		resp.setStatusCode(HttpStatus.OK.value());
+		try {
+			OCRParser parser = new OCRParser();
+	        String jsonOcr = parser.parsingToJson(allParams.get("fileMattruoc"), allParams.get("fileMatSau"));
+			
+	        OCRField ocrField = new Gson().fromJson(jsonOcr, OCRField.class);
+			resp.setData(ocrField);
+			resp.setStatusCode(HttpStatus.OK.value());
+		} catch (Exception e) {
+			resp.setData(new OCRField());
+			resp.setMsg("Lỗi đọc dữ liệu từ ảnh.");
+			resp.setStatusCode(HttpStatus.BAD_REQUEST.value());
+		}
 		return new Gson().toJson(resp);
 	}
 	

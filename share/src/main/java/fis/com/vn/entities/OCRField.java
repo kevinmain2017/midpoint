@@ -19,7 +19,7 @@ public class OCRField {
 	public OCRField createExample() {
 		OCRField ocrField = new OCRField();
 		ocrField.setEthnicity("KINH");
-		ocrField.setSex("MALE");
+		ocrField.setSex("NAM");
 		ocrField.setName("BÙI ĐỨC THIỆN");
 		ocrField.setDob("27/01/1990");
 		ocrField.setAddress("THÁI HỒNG, HUYỆN THÁI THỤY, THÁI BÌNH");
@@ -43,6 +43,6 @@ public class OCRField {
 			return true;
 		}
 		
-		return false;
+		return true;
 	}
 }

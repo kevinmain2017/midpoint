@@ -31,6 +31,13 @@
 <!-- jQuery -->
 	<script src="${contextPath }/plugins/jquery/jquery.min.js"></script>
 	
+
+<link href="${contextPath}/css/jquery.growl.css" rel="stylesheet">
+<script src="${contextPath}/js/jquery.growl.js"></script>
+
+<link href="${contextPath}/css/sweetalert.css" rel="stylesheet">
+<script src="${contextPath}/js/sweetalert.min.js"></script>
+<script src="${contentPath }/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>	
 </head>
 <body class="hold-transition register-page">
 	<div class="register-box">
@@ -47,9 +54,9 @@
 				<c:if test="${not empty success }">
 					<div class="alert alert-success" role="alert">${success }</div>
 				</c:if>
-				<form action="" method="post">
+				<form action="" method="post" id="quickForm" enctype="multipart/form-data">
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Tên đầy đủ" name="fullName">
+						<input type="text" class="form-control" placeholder="Tên đầy đủ" name="fullName" id="fullName">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -57,7 +64,7 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Số điện thoại" name="phone">
+						<input type="text" class="form-control" placeholder="Số điện thoại" name="phone" id="phone">
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-phone"></span>
@@ -65,7 +72,7 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Tên đăng nhập" name="name">
+						<input type="text" class="form-control" placeholder="Tên đăng nhập" name="name" id='name'>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-user"></span>
@@ -73,11 +80,39 @@
 						</div>
 					</div>
 					<div class="input-group mb-3">
-						<input type="password" class="form-control" placeholder="Mật khẩu" name="password"/>
+						<input type="password" class="form-control" placeholder="Mật khẩu" name="password" id="password"/>
 						<div class="input-group-append">
 							<div class="input-group-text">
 								<span class="fas fa-lock"></span>
 							</div>
+						</div>
+					</div>
+					<i><b>Yêu cầu:</b> Ảnh chụp rõ mặt bạn</i>
+					<div class="input-group mb-3">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+							<label class="custom-file-label" for="exampleInputFile">Ảnh 1</label>
+						</div>
+						<div class="input-group-append">
+							<span class="input-group-text" id="">Tải lên</span>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="exampleInputFile2" name="file1">
+							<label class="custom-file-label" for="exampleInputFile2">Ảnh 2</label>
+						</div>
+						<div class="input-group-append">
+							<span class="input-group-text" id="">Tải lên</span>
+						</div>
+					</div>
+					<div class="input-group mb-3">
+						<div class="custom-file">
+							<input type="file" class="custom-file-input" id="exampleInputFile3" name="file2">
+							<label class="custom-file-label" for="exampleInputFile3">Ảnh 3</label>
+						</div>
+						<div class="input-group-append">
+							<span class="input-group-text" id="">Tải lên</span>
 						</div>
 					</div>
 					<div class="row">
@@ -95,7 +130,34 @@
 		<!-- /.card -->
 	</div>
 	<!-- /.register-box -->
-
+	<%@include file="layout/js.jsp"%>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		bsCustomFileInput.init();
+	  	$("#quickForm").submit(function(e){
+	  		if($("#exampleInputFile").val() == "" || $("#exampleInputFile3").val() == "" || $("#exampleInputFile2").val() == "") {
+	  			alertER("Tải đủ 3 ảnh rõ mặt bạn");
+	  			e.preventDefault();
+	  		}
+	  		if($("#fullName").val() == "") {
+	  			alertER("Nhập tên đầy đủ của bạn");
+	  			e.preventDefault();
+	  		}
+	  		if($("#phone").val() == "") {
+	  			alertER("Nhập vào số điện thoại của bạn");
+	  			e.preventDefault();
+	  		}
+	  		if($("#name").val() == "") {
+	  			alertER("Nhập vào tên đăng nhập của bạn");
+	  			e.preventDefault();
+	  		}
+	  		if($("#password").val() == "") {
+	  			alertER("Nhập vào mật khẩu của bạn");
+	  			e.preventDefault();
+	  		}
+	  	});
+	});
+	</script>
 	
 	<!-- Bootstrap 4 -->
 	<script src="${contextPath }/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -9,7 +9,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1 class="m-0 text-dark">Xác thực</h1>
+					<h1 class="m-0 text-dark">Đăng ký xác thực</h1>
 				</div>
 				<!-- /.col -->
 				<div class="col-sm-6">
@@ -17,7 +17,7 @@
 						<li class="breadcrumb-item">
 							<a href="${contextPath }/">Trang chủ</a>
 						</li>
-						<li class="breadcrumb-item active">Xác thực chữ ký số</li>
+						<li class="breadcrumb-item active">Xác thực OTP</li>
 					</ol>
 				</div>
 				<!-- /.col -->
@@ -33,28 +33,21 @@
 		<div class="container-fluid">
 			<div class="card card-primary">
 				<div class="card-header">
-					<h3 class="card-title">Xác thực chữ ký số</h3>
+					<h3 class="card-title">Xác thực OTP</h3>
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form role="form" id="quickForm" method="post" action="${contextPath }/xac-thuc/xac-thuc-ca" enctype="multipart/form-data">
+				<form role="form" id="quickForm" method="get" action="${contextPath }/dang-ky-xac-thuc/xac-thuc-otp">
 					<div class="card-body">
 						<div class="form-group">
-							<label for="exampleInputFile">Tải file ký</label>
-							<div class="input-group">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-									<label class="custom-file-label" for="exampleInputFile">Chọn file</label>
-								</div>
-								<div class="input-group-append">
-									<span class="input-group-text" id="">Tải lên</span>
-								</div>
-							</div>
+							<label for="exampleInputFile">Nhập số điện thoại</label>
+							<input type="text" class="form-control" id="exampleInputFile" name="phone">
 						</div>
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Ký số</button>
+						<a href="/dang-ky-xac-thuc" class="btn btn-default">Quay lại</a>
+						<button type="submit" class="btn btn-primary">Gửi mã OTP</button>
 					</div>
 				</form>
 			</div>
@@ -69,27 +62,10 @@ $(document).ready(function () {
   	bsCustomFileInput.init();
   	$("#quickForm").submit(function(e){
   		if($("#exampleInputFile").val() == "") {
-  			alertER("Chọn file cần tải");
-  			e.preventDefault();
-  		}
-  		if(!checkExFile($("#exampleInputFile"))) {
+  			alertER("Nhập vào số điện thoại nhận mã.");
   			e.preventDefault();
   		}
   	});
-  	
-  	$("#exampleInputFile").change(function () {
-  		checkExFile($(this));
-    });
-  	
-  	function checkExFile(obj) {
-  		var fileExtension = ['xml', 'pdf'];
-        if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-        	alertER("Bạn chỉ có thể chọn file : "+fileExtension.join(', '));
-        	return false;
-        }
-        return true;
-  	}
 });
-
 </script>
 <%@include file="../../layout/footer.jsp"%>

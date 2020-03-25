@@ -37,25 +37,17 @@
 				</div>
 				<!-- /.card-header -->
 				<!-- form start -->
-				<form role="form" id="quickForm" method="post" action="${contextPath }/dang-ky-xac-thuc/xac-thuc-ca" enctype="multipart/form-data">
+				<form role="form" id="quickForm" method="post" action="${contextPath }/dang-ky-xac-thuc/xac-thuc-ca">
 					<div class="card-body">
 						<div class="form-group">
-							<label for="exampleInputFile">Tải file ký</label>
-							<div class="input-group">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-									<label class="custom-file-label" for="exampleInputFile">Chọn file</label>
-								</div>
-								<div class="input-group-append">
-									<span class="input-group-text" id="">Tải lên</span>
-								</div>
-							</div>
+							<label for="exampleInputFile">Nhập Serial của chữ ký số (<i>Demo: 202003042228</i>)</label>
+							<input type="text" class="form-control" id="exampleInputFile" name="serial">
 						</div>
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
 						<a href="/dang-ky-xac-thuc" class="btn btn-default">Quay lại</a>
-						<button type="submit" class="btn btn-primary">Tải file</button>
+						<button type="submit" class="btn btn-primary">Lưu</button>
 					</div>
 				</form>
 			</div>
