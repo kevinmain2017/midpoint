@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import fis.com.vn.common.SendSMS;
 import fis.com.vn.repository.MUserTypeRepository;
 import fis.com.vn.resp.Resp;
 import fis.com.vn.table.MUserType;
@@ -31,10 +32,17 @@ public class OTPController extends BaseController{
 	public String getCodeOTP(HttpServletRequest req, @RequestParam Map<String, String> allParams) {
 		Resp resp = new Resp();
 		
-		int code = randomNumber(1000, 9999);
-		
-		resp.setData(code);
-		resp.setStatusCode(HttpStatus.OK.value());
+		try {
+			int code = randomNumber(1000, 9999);
+			
+			SendSMS.smsFpt("0984707337", "Test message "+code);
+			
+			resp.setData(code);
+			resp.setStatusCode(HttpStatus.OK.value());
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setStatusCode(HttpStatus.BAD_REQUEST.value());
+		}
 
 		return new Gson().toJson(resp);
 	}

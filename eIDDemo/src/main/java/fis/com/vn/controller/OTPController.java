@@ -57,7 +57,7 @@ public class OTPController extends BaseController{
 			redirectAttributes.addFlashAttribute("success", "Xác thực OTP thành công");
 			return "redirect:/xac-thuc/dieu-huong";
 		} else {
-			return "dangkyxacthuc/otp/xacThuc";
+			return "xacthuc/otp/xacThuc";
 		}
 	}
 	public boolean xacThucOTP (Model model, HttpServletRequest req, Map<String, String> allParams) {
