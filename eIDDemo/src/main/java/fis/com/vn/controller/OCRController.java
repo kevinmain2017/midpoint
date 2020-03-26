@@ -92,7 +92,7 @@ public class OCRController extends BaseController{
 			ocrField.setUserOid(getOid(req));
 			ocrField.setTypeCode(Contains.OCR);
 			
-			String json = Request.post(new Gson().toJson(ocrField), this.getAuthorizationToken(req), origin + Contains.URL_DOI_CHIEU_THONG_TIN_OCR);
+			String json = Request.post(new Gson().toJson(ocrField), this.getAuthorizationToken(req), origin + Contains.URL_DOI_CHIEU_THONG_TIN_OCR+"?user_oid="+getOid(req));
 			
 			if(Request.getStatus(json) == 200) {
 				return true;

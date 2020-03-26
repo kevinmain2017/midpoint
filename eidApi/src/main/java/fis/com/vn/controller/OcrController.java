@@ -18,14 +18,18 @@ import com.fis.ocr.OCRParser;
 import com.google.gson.Gson;
 
 import fis.com.vn.entities.OCRField;
+import fis.com.vn.repository.MUserRepository;
 import fis.com.vn.repository.MUserTypeRepository;
 import fis.com.vn.resp.Resp;
+import fis.com.vn.table.MUser;
 import fis.com.vn.table.MUserType;
 
 @Controller
 public class OcrController {
 	@Autowired
 	MUserTypeRepository mUserTypeRepository;
+	@Autowired
+	MUserRepository mserRepository;
 	
 	
 	@PostMapping(value = "/api/get-info-ocr")
@@ -55,7 +59,9 @@ public class OcrController {
 	public String validOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams, @RequestBody OCRField ocrField) {
 		Resp resp = new Resp();
 		
-		if(new OCRField().createExample().compare(ocrField)) {
+		MUser mUser = mserRepository.findByOid(allParams.get("user_oid"));
+		
+		if(mUser.getEmployeeNumber().equals(ocrField.getId())) {
 			MUserType mUserType = mUserTypeRepository.findByUserOidAndTypeCode(ocrField.getUserOid(), ocrField.getTypeCode());
 			if(mUserType == null) {
 				mUserType = new MUserType();
