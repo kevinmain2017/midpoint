@@ -100,10 +100,15 @@ public class FaceIDController extends BaseController{
 	public String checktraning(HttpServletRequest req, @RequestParam Map<String, String> allParams) {
 		Resp resp = new Resp();
 		
-		if(!FaceID.isTrain()) {
-			resp.setData("true");
-			resp.setStatusCode(HttpStatus.OK.value());
-		} else {
+		try {
+			if(!FaceID.isTrain()) {
+				resp.setData("true");
+				resp.setStatusCode(HttpStatus.OK.value());
+			} else {
+				resp.setData("false");
+				resp.setStatusCode(HttpStatus.NOT_MODIFIED.value());
+			}
+		} catch (Exception e) {
 			resp.setData("false");
 			resp.setStatusCode(HttpStatus.NOT_MODIFIED.value());
 		}

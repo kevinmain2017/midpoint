@@ -36,27 +36,30 @@ public class DangKyController extends BaseController{
 	@GetMapping(value = "/register/check") 
 	@ResponseBody
 	public String check(Model model, HttpServletRequest req, RedirectAttributes redirectAttributes) {
-		UriComponentsBuilder builderChitieuTemplate = UriComponentsBuilder.fromHttpUrl(origin + Contains.URL_CHECK_TRANG_THAI_TRANING_FACE_ID);
-		
-		String json = Request.get(builderChitieuTemplate,this.getAuthorizationToken(req));
-		if(Request.getStatus(json) == 200) {	
-			String fileCmt = (String)req.getSession().getAttribute("infoImage");
-			req.getSession().removeAttribute("infoImage");
-			OCRField ocrField = (OCRField) req.getSession().getAttribute("ocrField");
+		try {
+			UriComponentsBuilder builderChitieuTemplate = UriComponentsBuilder.fromHttpUrl(origin + Contains.URL_CHECK_TRANG_THAI_TRANING_FACE_ID);
 			
-			String url = origin + Contains.URL_DANG_KY_DOI_CHIEU_THONG_TIN_FACE_ID+"?user_oid="+getOid(req)+"&type_code="+Contains.FACE_ID+"&card_id="+ocrField.getId();
-			String jsonCheck = Request.postFileEncode("", this.getAuthorizationToken(req), url, fileCmt);
+			String json = Request.get(builderChitieuTemplate,this.getAuthorizationToken(req));
+			if(Request.getStatus(json) == 200) {	
+				String fileCmt = (String)req.getSession().getAttribute("infoImage");
+				req.getSession().removeAttribute("infoImage");
+				OCRField ocrField = (OCRField) req.getSession().getAttribute("ocrField");
+				
+				String url = origin + Contains.URL_DANG_KY_DOI_CHIEU_THONG_TIN_FACE_ID+"?user_oid="+getOid(req)+"&type_code="+Contains.FACE_ID+"&card_id="+ocrField.getId();
+				String jsonCheck = Request.postFileEncode("", this.getAuthorizationToken(req), url, fileCmt);
+				
+				if(Request.getStatus(jsonCheck) == 200) {
+					return "1";
+				} else {
+					return "3";
+				}	
+			} 
 			
-			if(Request.getStatus(jsonCheck) == 200) {
-				return "1";
-			} else {
-				return "3";
-			}
-			
-			
-		} 
-		
-		return "2";
+			return "2";
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "4";
 	}
 	
 	@GetMapping(value = "/register/complete") 

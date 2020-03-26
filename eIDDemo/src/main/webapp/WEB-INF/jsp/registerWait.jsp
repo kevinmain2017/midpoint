@@ -53,7 +53,7 @@
 				<div class="alert alert-danger" role="alert" id="alertError" style="display: none;">
 				  	Xác thực ảnh thất bại
 				</div>
-				Đang xử lý dữ liệu vui lòng đợi....
+				<div id="textShow">Đang xử lý dữ liệu vui lòng đợi....</div>
 			</div>
 			<!-- /.form-box -->
 		</div>
@@ -71,8 +71,12 @@
 			    	 alertER("Xác thực ảnh thất bại");
 			    	 $("#alertError").show();
 			    	 setTimeout(function(){ window.location.href='/register'; }, 2000);
+			     } else if(result == '4') {
+			    	 alertER("Lỗi hệ thống xác thực");
+			    	 setTimeout(function(){ window.location.href='/register'; }, 2000);
 			     }
 			 }});
+			$("#textShow").append("<br/>Đang xử lý dữ liệu vui lòng đợi...");
 		}, 5000);
 		
 		 
