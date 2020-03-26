@@ -1,6 +1,8 @@
 package fis.com.vn.controller;
 
 import java.io.File;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +23,16 @@ import com.fis.faceid.FaceID;
 import com.fis.ocr.OCRParser;
 import com.fis.ocr.utils.Iconstants;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import fis.com.vn.entities.FaceId;
+import fis.com.vn.entities.FaceIdInfo;
 import fis.com.vn.entities.OCRField;
 import fis.com.vn.repository.MUserImageRepository;
 import fis.com.vn.repository.MUserRepository;
 import fis.com.vn.repository.MUserTypeRepository;
 import fis.com.vn.resp.Resp;
+import fis.com.vn.table.MType;
 import fis.com.vn.table.MUser;
 import fis.com.vn.table.MUserImage;
 import fis.com.vn.table.MUserType;
@@ -49,12 +54,13 @@ public class FaceIDController extends BaseController{
         try {
         	String jsonInfoDb = FaceID.faceRecognition(allParams.get("file"));
     		System.out.println("jsonInfoDb:"+jsonInfoDb);
-    		FaceId faceId = new Gson().fromJson(jsonInfoDb, FaceId.class);
+    		Type type = new TypeToken<ArrayList<FaceIdInfo>>() {}.getType();
+    		ArrayList<FaceIdInfo> faceId = new Gson().fromJson(jsonInfoDb, type);
     		
-    		if(faceId.getBody() == null) {
+    		if(faceId == null || faceId == null && faceId.size() <= 0) {
     			throw new Exception();
     		}
-    		if(!faceId.getBody().get(0).getId().equals(allParams.get("card_id"))) {
+    		if(!faceId.get(0).getPosition().equals(allParams.get("card_id"))) {
     			throw new Exception();
     		}
     		
@@ -156,13 +162,17 @@ public class FaceIDController extends BaseController{
 			
 			MUser mUser = mserRepository.findByOid(allParams.get("user_oid"));
 	        String jsonInfo = FaceID.faceRecognition(allParams.get("file"));
-	        FaceId faceId = new Gson().fromJson(jsonInfo, FaceId.class);
+	        
+	        Type type = new TypeToken<ArrayList<FaceIdInfo>>() {}.getType();
+    		ArrayList<FaceIdInfo> faceId = new Gson().fromJson(jsonInfo, type);
+	        
+//	        FaceId faceId = new Gson().fromJson(jsonInfo, FaceId.class);
 	        System.out.println(jsonInfo);
-	        if(faceId.getBody() == null) {
+	        if(faceId == null || (faceId != null && faceId.size() <=0)) {
 	        	return false;
 	        }
 	        
-			if(mUser.getEmployeeNumber().equals(faceId.getBody().get(0).getId())) {
+			if(mUser.getEmployeeNumber().equals(faceId.get(0).getPosition())) {
 				return true;
 			}
 	        
