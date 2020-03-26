@@ -84,6 +84,28 @@ public class Request {
 		}
 		return null;
 	}
+	public static String postFileEncode(String json, String authorization, String url, String file) {
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			headers.add("Authorization", authorization);
+
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+			body.add("file", file.getBytes());
+			body.add("json", json);
+
+			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+			
+			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+			return response.getBody();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 	public static String postFile(String json, String authorization, String url, MultipartFile fileMattruoc, MultipartFile fileMatSau) {
 		try {
 			RestTemplate restTemplate = new RestTemplate();
@@ -119,6 +141,31 @@ public class Request {
 			body.add("file1", Base64.getEncoder().encode(file1.getBytes()));
 			body.add("file2", Base64.getEncoder().encode(file2.getBytes()));
 			body.add("file3", Base64.getEncoder().encode(file3.getBytes()));
+			body.add("json", json);
+
+			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+			
+			ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+
+			return response.getBody();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	public static String postFileMultiple(String json, String authorization, String url, MultipartFile... files) {
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+			headers.add("Authorization", authorization);
+
+			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+
+			for (int i = 0; i < files.length; i++) {
+				body.add("file"+(i=1), Base64.getEncoder().encode(files[i].getBytes()));
+			}
 			body.add("json", json);
 
 			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);

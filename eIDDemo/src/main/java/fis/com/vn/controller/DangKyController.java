@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -22,6 +23,7 @@ import fis.com.vn.entities.OCRField;
 import fis.com.vn.midpoint.JsonUser;
 import fis.com.vn.midpoint.ParamsUser;
 import fis.com.vn.midpoint.User;
+import fis.com.vn.table.MUser;
 
 @Controller
 public class DangKyController extends BaseController{
@@ -31,27 +33,56 @@ public class DangKyController extends BaseController{
 		
 		return "register";
 	}
+	@GetMapping(value = "/register/check") 
+	@ResponseBody
+	public String check(Model model, HttpServletRequest req, RedirectAttributes redirectAttributes) {
+		UriComponentsBuilder builderChitieuTemplate = UriComponentsBuilder.fromHttpUrl(origin + Contains.URL_CHECK_TRANG_THAI_TRANING_FACE_ID);
+		
+		String json = Request.get(builderChitieuTemplate,this.getAuthorizationToken(req));
+		if(Request.getStatus(json) == 200) {	
+			String fileCmt = (String)req.getSession().getAttribute("infoImage");
+			req.getSession().removeAttribute("infoImage");
+			OCRField ocrField = (OCRField) req.getSession().getAttribute("ocrField");
+			
+			String url = origin + Contains.URL_DANG_KY_DOI_CHIEU_THONG_TIN_FACE_ID+"?user_oid="+getOid(req)+"&type_code="+Contains.FACE_ID+"&card_id="+ocrField.getId();
+			String jsonCheck = Request.postFileEncode("", this.getAuthorizationToken(req), url, fileCmt);
+			
+			if(Request.getStatus(jsonCheck) == 200) {
+				return "1";
+			} else {
+				return "3";
+			}
+			
+			
+		} 
+		
+		return "2";
+	}
 	
+	@GetMapping(value = "/register/complete") 
+	public String register(Model model, HttpServletRequest req) {
+		
+		
+		return "registerComplete";
+	}
 	@PostMapping(value = "/register/upload-training") 
 	public String registerTraining(Model model, HttpServletRequest req, @RequestParam Map<String, String> allParams,
 			RedirectAttributes redirectAttributes, @RequestParam("file1") MultipartFile file1
 			, @RequestParam("file2") MultipartFile file2, @RequestParam("file3") MultipartFile file3) {
 		try {
+
+			OCRField ocrField = (OCRField) req.getSession().getAttribute("ocrField");
 			
-			String fileCmt = (String)req.getSession().getAttribute("infoImage");
-			req.getSession().removeAttribute("infoImage");
+			String url = origin + Contains.URL_TRANING_FACE_ID+"?user_oid="+getOid(req)+"&type_code="+Contains.FACE_ID;
+			String json = Request.postFile(new Gson().toJson(ocrField), this.getAuthorizationToken(req), url, file1, file2, file3);
 			
+			if(Request.getStatus(json) == 200) {
+				return "registerWait";
+			} else {
+				model.addAttribute("error", "Lỗi trong quá trình xử lý ảnh.");
+			}
 			
-//			String url = origin + Contains.URL_DOI_CHIEU_THONG_TIN_FACE_ID+"?user_oid="+getOid(req)+"&type_code="+Contains.FACE_ID;
-//			String json = Request.postFileEncode("", this.getAuthorizationToken(req), url, file);
-//			
-//			if(Request.getStatus(json) == 200) {
-//				return "dangkyxacthuc/faceid/thanhCong";
-//			} else {
-//				redirectAttributes.addFlashAttribute("error", "Ảnh nhận dạng không đúng.");
-//			}
-			
-			return "registerComplete";
+			return "registerUpload";
 		} catch (Exception e) {
 			model.addAttribute("error", "Lỗi api");
 		}

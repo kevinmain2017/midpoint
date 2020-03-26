@@ -14,6 +14,6 @@ public class User {
 	String title;
 	String address;
 	String phone;
-//	String numberCardId;
+	String employeeNumber;
 	Credentials credentials;
 }

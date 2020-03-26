@@ -16,6 +16,9 @@ public class Contains {
 	public static final String URL_LAY_MA_OTP = PATH_API + "get-code-otp";
 	public static final String URL_LAY_SO_DT_OTP = PATH_API + "get-phone-user";
 	public final static String URL_DOI_CHIEU_THONG_TIN_FACE_ID = PATH_API + "valid-face-id";
+	public final static String URL_DANG_KY_DOI_CHIEU_THONG_TIN_FACE_ID = PATH_API + "register-valid-face-id";
+	public final static String URL_CHECK_TRANG_THAI_TRANING_FACE_ID = PATH_API + "check-traning-face-id";
+	public final static String URL_TRANING_FACE_ID = PATH_API + "traning-face-id";
 	public static final String URL_KY_SO = PATH_API + "digital-signatures";
 	public static final String URL_DANG_KY_KY_SO = PATH_API + "digital-signatures-register";
 	

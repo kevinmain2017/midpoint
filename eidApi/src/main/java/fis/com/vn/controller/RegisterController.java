@@ -122,7 +122,7 @@ public class RegisterController extends BaseController{
 		user.setTitle("");
 		user.setAddress(paramsUser.getAddress());
 		user.setPhone(paramsUser.getPhone());
-//		user.setNumberCardId(paramsUser.getId());
+		user.setEmployeeNumber(paramsUser.getId());
 		jsonUser.setUser(user);
 		return jsonUser;
 	}
