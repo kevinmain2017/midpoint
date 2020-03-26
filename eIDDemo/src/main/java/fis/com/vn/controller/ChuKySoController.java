@@ -1,5 +1,7 @@
 package fis.com.vn.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,14 +56,32 @@ public class ChuKySoController extends BaseController{
 		String json = null;
 		if(typeFile.equals("pdf")) {
 			json = Request.postFileEncode("", this.getAuthorizationToken(req), url, file);
+			String strSignEncode = Request.getAttrFromJson(json, "data");
+			req.getSession().setAttribute("viewPdf", strSignEncode);
+			System.out.println(strSignEncode);
 		} else if( typeFile.equals("xml")){
+			String strSignEncode = Request.getAttrFromJson(json, "data");
+			req.getSession().setAttribute("viewXml", strSignEncode);
+			System.out.println(strSignEncode);
 			json = Request.postFile("", this.getAuthorizationToken(req), url, file);
 		}
 		
 		if(Request.getStatus(json) == 200) {
-			redirectAttributes.addFlashAttribute("success", "Xác thực chữ ký số thành công");
-			return "redirect:/xac-thuc/dieu-huong";
+			if(typeFile.equals("pdf")) {
+				String strSignEncode = Request.getAttrFromJson(json, "data");
+				req.getSession().setAttribute("viewPdf", strSignEncode);
+			} else if( typeFile.equals("xml")){
+				String strSignEncode = Request.getAttrFromJson(json, "data");
+				byte[] b = Base64.getDecoder().decode(strSignEncode.getBytes());
+				model.addAttribute("xml", new String(b));
+			}
+			model.addAttribute("typeFile", typeFile);
+			model.addAttribute("success", "Xác thực chữ ký số thành công");
+			return "xacthuc/chukyso/viewFileKy";
+//			return "redirect:/xac-thuc/dieu-huong";
 		} else {
+			req.getSession().removeAttribute("viewPdf");
+			req.getSession().removeAttribute("viewxml");
 			redirectAttributes.addFlashAttribute("error", "Xác thực thất bại");
 		}
 		

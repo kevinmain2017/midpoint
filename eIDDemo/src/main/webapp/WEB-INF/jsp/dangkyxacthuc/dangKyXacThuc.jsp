@@ -63,8 +63,12 @@
 											<input type="checkbox" value="${item.code }" <c:if test="${check eq 1 }">checked="checked"</c:if> disabled="disabled"/>
 										</td>
 										<td>
-											<a href="javascript:void(0)" onclick="register('/dang-ky-xac-thuc/dk?code=${item.code }', '${item.code }')"><i class="fas fa-registered"></i></a>
-											<a href="javascript:void(0)" onclick="deleteRC('/dang-ky-xac-thuc/huy?code=${item.code }')" style="margin-left: 10px;"><i class="fas fa-trash"></i></a>
+											<c:if test="${check eq 0 }">
+												<a href="javascript:void(0)" onclick="register('/dang-ky-xac-thuc/dk?code=${item.code }', '${item.code }')"><i class="fas fa-registered"></i></a>
+											</c:if>
+											<c:if test="${check eq 1 }">
+												<a href="javascript:void(0)" onclick="deleteRC('/dang-ky-xac-thuc/huy?code=${item.code }')"><i class="fas fa-trash"></i></a>
+											</c:if>
 										</td>
 									</tr>
 								</c:forEach>

@@ -1,6 +1,7 @@
 package fis.com.vn.controller;
 
 import java.io.FileInputStream;
+import java.util.Base64;
 import java.util.Map;
 import java.util.UUID;
 
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,9 +61,10 @@ public class CaController extends BaseController{
 	public String validOcr(HttpServletRequest req, @RequestParam Map<String, String> allParams, @RequestParam(name="file", required=false) byte[] file) {
 		Resp resp = new Resp();
 		
-		if(checkCa(file, allParams)) {
+		String strSignEncode = checkCa(file, allParams);
+		if(strSignEncode != null) {
 			
-			resp.setData("true");
+			resp.setData(strSignEncode);
 			resp.setStatusCode(HttpStatus.OK.value());
 		} else {
 			resp.setData("false");
@@ -68,26 +72,28 @@ public class CaController extends BaseController{
 		}
 		return new Gson().toJson(resp);
 	}
-	public Boolean checkCa(byte[] file, Map<String, String> allParams) {
+	public String checkCa(byte[] file, Map<String, String> allParams) {
 		try {
 //			MUserType mUserTypeDb = mUserTypeRepository.findByUserOidAndTypeCode(allParams.get("user_oid"), allParams.get("type_code"));
 			
 			System.out.println(allParams.get("type_file"));
+			Resource resource = new ClassPathResource("eSignCloud.p12");
 			
+			System.out.println(resource.getFile().getAbsolutePath());
 	        byte[] signed = null;
 	        if(allParams.get("type_file").equals("xml")) {
 	        	String xmlData = new String(file, "UTF-8");
-	        	signed = eSignDemo.signXmlUsingPassCode(agreementUUID, xmlData, pwd, "C:\\Users\\Administrator\\Desktop\\eSignCloud.p12");
+	        	signed = eSignDemo.signXmlUsingPassCode(agreementUUID, xmlData, pwd, resource.getFile().getAbsolutePath());
 	        } else if(allParams.get("type_file").equals("pdf")) {
-	        	signed = eSignDemo.signPdfUsingPassCode(agreementUUID, allParams.get("file"), pwd, "C:\\Users\\Administrator\\Desktop\\eSignCloud.p12");
+	        	signed = eSignDemo.signPdfUsingPassCode(agreementUUID, allParams.get("file"), pwd, resource.getFile().getAbsolutePath());
 	        }
 	        if(signed != null) {
-	        	return true;
+	        	return Base64.getEncoder().encodeToString(signed);
 	        }
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
-		return false;
+		return null;
 	}
 }
