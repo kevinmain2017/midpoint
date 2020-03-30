@@ -47,7 +47,11 @@
 		<div class="card">
 			<div class="card-body register-card-body">
 				<form action="${contextPath}/register/upload" method="post" id="quickForm" enctype="multipart/form-data">
-					
+					<div class="row">
+						<div class="col-12">
+							<img src="/view" style="width: 100%; height: 250px;"/>
+						</div>
+					</div>
 					<i>Xác nhận thông tin</i>
 					<div class="form-group">
 						<label for="hoTen">Họ và tên</label>

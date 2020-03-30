@@ -57,6 +57,7 @@ public class EidFilter extends GenericFilterBean{
 		listAllow.add("/dist/*");
 		listAllow.add("/plugins/*");
 		listAllow.add("/docs/*");
+		listAllow.add("/view");
 
 		return checkAllow(listAllow, req);
 	}
