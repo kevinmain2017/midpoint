@@ -15,6 +15,8 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.GenericFilterBean;
 
+import fis.com.vn.common.Contains;
+
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class EidFilter extends GenericFilterBean{
@@ -26,36 +28,17 @@ public class EidFilter extends GenericFilterBean{
 		HttpServletResponse resp = (HttpServletResponse) response;
 		resp.setCharacterEncoding("utf-8");
 		req.setCharacterEncoding("utf-8");
+		
+//		if(req.getRequestURI().startsWith("/public")) {
+//			if(req.getHeader("token") != null && req.getHeader("token").equals(Contains.TOKEN_PUBLIC_API)) {
+//				chain.doFilter(request, response);
+//				return;
+//			} else {
+//				resp.getWriter().print("Not permission");
+//				return;
+//			}
+//		}
+		
 		chain.doFilter(request, response);
-	}
-	public Boolean allowUrl(HttpServletRequest req) {
-		ArrayList<String> listAllow = new ArrayList<>();
-		listAllow.add("/font/*");
-		listAllow.add("/fonts/*");
-		listAllow.add("/webfonts/*");
-		listAllow.add("/select2-develop/*");
-		listAllow.add("/css/*");
-		listAllow.add("/js/*");
-		listAllow.add("/image/*");
-		listAllow.add("/images/*");
-		listAllow.add("/img/*");
-		listAllow.add("/favicon.ico");
-		listAllow.add("/login");
-		listAllow.add("/logout");
-		listAllow.add("/static/file/*");
-		listAllow.add("/register");
-		listAllow.add("/dist/*");
-		listAllow.add("/plugins/*");
-		listAllow.add("/docs/*");
-
-		return checkAllow(listAllow, req);
-	}
-	private Boolean checkAllow(ArrayList<String> listAllow, HttpServletRequest req) {
-		for (String string : listAllow) {
-			if (req.getRequestURI().matches(string.replace("*", "[\\w\\W]*"))) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

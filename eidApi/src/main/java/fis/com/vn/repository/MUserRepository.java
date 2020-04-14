@@ -27,4 +27,6 @@ public interface MUserRepository extends CrudRepository<MUser, String>{
 
 	MUser findByNameNormAndPassword(String string, String md5);
 
+	MUser findByNameOrig(String username);
+
 }

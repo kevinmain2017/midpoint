@@ -15,6 +15,8 @@ public class MUser {
 	String oid;
 	@Column(name = "name_norm")
 	String nameNorm;
+	@Column(name = "name_orig")
+	String nameOrig;
 	String password;
 	String phone;
 	@Column(name = "employeeNumber")

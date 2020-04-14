@@ -142,11 +142,11 @@ public class FaceIDController extends BaseController{
 	        // add image to db
 //	        String datatraining = Iconstants.GSON.toJson(faceData);
 //	        System.out.println(datatraining);
-	        String json = FaceID.uploadTraning(Iconstants.GSON.toJson(faceData));
-	        System.out.println(json);
+//	        String json = FaceID.uploadTraning(Iconstants.GSON.toJson(faceData));
+//	        System.out.println(json);
 	        // train
 
-	        FaceID.train();
+//	        FaceID.train();
 	        
 			resp.setData("true");
 			resp.setStatusCode(HttpStatus.OK.value());

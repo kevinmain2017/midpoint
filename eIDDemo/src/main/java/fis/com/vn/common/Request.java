@@ -115,8 +115,8 @@ public class Request {
 			headers.add("Authorization", authorization);
 
 			MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-			body.add("fileMattruoc", Base64.getEncoder().encode(fileMattruoc.getBytes()));
-			body.add("fileMatSau", Base64.getEncoder().encode(fileMatSau.getBytes()));
+			body.add("fileMattruoc", Base64.getEncoder().encodeToString(fileMattruoc.getBytes()));
+			body.add("fileMatSau", Base64.getEncoder().encodeToString(fileMatSau.getBytes()));
 			body.add("json", json);
 
 			HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
