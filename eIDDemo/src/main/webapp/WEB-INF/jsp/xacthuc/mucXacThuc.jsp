@@ -40,9 +40,9 @@
 					action="${contextPath }/xac-thuc">
 					<div class="card-body">
 						<ul class="list-group">
-							<li class="list-group-item"><a href="${contextPath }/xac-thuc?type=1">Mức xác thực loại 1</a></li>
-							<li class="list-group-item"><a href="${contextPath }/xac-thuc?type=2">Mức xác thực loại 2</a></li>
-							<li class="list-group-item"><a href="${contextPath }/xac-thuc?type=3">Mức xác thực loại 3</a></li>
+							<li class="list-group-item"><a href="${contextPath }/xac-thuc?type=1">Mức xác thực số 1</a></li>
+							<li class="list-group-item"><a href="${contextPath }/xac-thuc?type=2">Mức xác thực số 2</a></li>
+							<li class="list-group-item"><a href="${contextPath }/xac-thuc?type=3">Mức xác thực số 3</a></li>
 						</ul>
 					</div>
 				</form>

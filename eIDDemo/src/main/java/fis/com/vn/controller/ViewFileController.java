@@ -38,6 +38,26 @@ public class ViewFileController {
 	    }
 	}
 	
+	@RequestMapping(value = { "/view" }, method = RequestMethod.GET)
+	@ResponseBody
+	public void load(HttpServletRequest req,HttpServletResponse resp) {
+
+	    resp.setHeader("Expires", "0");
+	    resp.setHeader("Cache-Control", "must-revalidate, post-check=0, pre-check=0");
+	    resp.setHeader("Pragma", "public");
+	    resp.setHeader("Content-Disposition","inline");
+	    try {
+	    	OutputStream out = null;
+	    	String strSignEncode = (String)req.getSession().getAttribute("infoImage");
+	        out = resp.getOutputStream();
+            byte[] b = Base64.getDecoder().decode(strSignEncode.getBytes());
+            out.write(b,0,b.length);
+            out.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 	@RequestMapping(value = { "/viewXml" }, method = RequestMethod.GET)
 	@ResponseBody
 	public void loadFile(HttpServletRequest req,HttpServletResponse resp) {

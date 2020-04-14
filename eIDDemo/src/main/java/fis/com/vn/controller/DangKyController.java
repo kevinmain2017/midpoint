@@ -81,6 +81,8 @@ public class DangKyController extends BaseController{
 			
 			if(Request.getStatus(json) == 200) {
 				return "registerWait";
+			} else if (Request.getStatus(json) == 400) {
+				model.addAttribute("error", "Ảnh của bạn không khớp với chứng minh thư.");
 			} else {
 				model.addAttribute("error", "Lỗi trong quá trình xử lý ảnh.");
 			}

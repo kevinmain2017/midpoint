@@ -135,7 +135,7 @@
 								<li class="nav-item">
 									<a href="${contextPath }/muc-xac-thuc" class="nav-link">
 										<i class="far fa-circle nav-icon"></i>
-										<p>Xác thực</p>
+										<p>Xác thực giao dịch</p>
 									</a>
 								</li>
 							</ul>

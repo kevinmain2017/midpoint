@@ -61,7 +61,8 @@ public class FaceIDController extends BaseController{
     			throw new Exception();
     		}
     		if(!faceId.get(0).getPosition().equals(allParams.get("card_id"))) {
-    			throw new Exception();
+    			resp.setData("false");
+    			resp.setStatusCode(HttpStatus.BAD_REQUEST.value());
     		}
     		
     		resp.setData("true");
