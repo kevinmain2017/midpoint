@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 
@@ -20,14 +21,13 @@ import fis.com.vn.repository.MUserRepository;
 import fis.com.vn.resp.Resp;
 import fis.com.vn.table.MUser;
 
-@Controller
+@RestController
 public class LoginController extends BaseController{
 	@Autowired
 	MUserRepository mUserRepository;
 	
-	@GetMapping(value = "/api/login",produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/public/login",produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
 	public String login(HttpServletRequest req, @RequestParam Map<String, String> allParams) {
 		Resp resp = new Resp();
 		resp.setMsg(allParams.get("oid"));
