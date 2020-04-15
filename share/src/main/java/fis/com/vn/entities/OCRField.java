@@ -15,7 +15,9 @@ public class OCRField {
 	
 	String userOid;
 	String typeCode;
-	String image;
+	String face;
+	String issue_date;
+	String issue_location;
 	
 	public OCRField createExample() {
 		OCRField ocrField = new OCRField();

@@ -173,9 +173,9 @@ public class FaceIDController extends BaseController{
 	        	return false;
 	        }
 	        
-			if(mUser.getEmployeeNumber().equals(faceId.get(0).getPosition())) {
-				return true;
-			}
+//			if(mUser.getEmployeeNumber().equals(faceId.get(0).getPosition())) {
+//				return true;
+//			}
 	        
 			return false;
 		} catch (Exception e) {

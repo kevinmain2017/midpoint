@@ -18,15 +18,11 @@ public interface MUserRepository extends CrudRepository<MUser, String>{
 
 	MUser findByOid(String string);
 
-	MUser findByNameNorm(String nameNorm);
-
 	@Modifying
 	@Transactional
 	@Query(value = "UPDATE m_user SET password=?1, phone=?2 where oid=?3", nativeQuery = true)
 	void update(String password, String phone, String oid);
 
-	MUser findByNameNormAndPassword(String string, String md5);
-
-	MUser findByNameOrig(String username);
+	MUser findByTenDangNhap(String username);
 
 }

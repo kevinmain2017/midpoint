@@ -32,13 +32,13 @@ public class LoginController extends BaseController{
 		Resp resp = new Resp();
 		resp.setMsg(allParams.get("oid"));
 		
-		MUser mUser = mUserRepository.findByNameNormAndPassword(allParams.get("userName"), Common.getMD5(allParams.get("password")));
-		if(mUser != null) {
-			resp.setData(mUser);
-			resp.setStatusCode(HttpStatus.OK.value());
-		} else {
-			resp.setStatusCode(HttpStatus.NOT_MODIFIED.value());
-		}
+//		MUser mUser = mUserRepository.findByNameNormAndPassword(allParams.get("userName"), Common.getMD5(allParams.get("password")));
+//		if(mUser != null) {
+//			resp.setData(mUser);
+//			resp.setStatusCode(HttpStatus.OK.value());
+//		} else {
+//			resp.setStatusCode(HttpStatus.NOT_MODIFIED.value());
+//		}
 		
 		return new Gson().toJson(resp);
 	}

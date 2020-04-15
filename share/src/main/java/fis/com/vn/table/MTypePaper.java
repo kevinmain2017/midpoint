@@ -9,8 +9,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "m_type")
-public class MType {
+@Table(name = "m_type_paper")
+public class MTypePaper {
 	@Id
 	String oid;
 	

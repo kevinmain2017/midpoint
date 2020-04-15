@@ -8,15 +8,15 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
+@Table(name = "m_notify")
 @Data
-@Table(name = "m_type")
-public class MType {
+public class MNotify {
 	@Id
 	String oid;
 	
-	@Column(name = "name")
-	String ten;
+	@Column(name = "content")
+	String noiDung;
 	
-	@Column(name = "code")
-	String ma;
+	@Column(name = "type")
+	String loaiThongBao;
 }

@@ -2,6 +2,11 @@ package fis.com.vn.Test;
 
 import com.fis.faceid.FaceID;
 import com.fis.ocr.OCRParser;
+import com.google.gson.Gson;
+
+import fis.com.vn.entities.OCRField;
+import fis.com.vn.response.NoiDungOCR;
+
 import org.apache.commons.io.IOUtils;
 import vn.com.fis.esigncloud.eSignDemo;
 
@@ -48,8 +53,8 @@ public class Test2 {
         String encodstring1 = encodeFileToBase64Binary(file1);
 
         String encodstring2 = encodeFileToBase64Binary(file2);
-
-
+        System.out.println(encodstring1);
+        System.out.println(encodstring2);
         
         
 		FaceID.init("C:\\Users\\chinhvd4\\Downloads\\lbpcascade_frontalface_improved.xml");
@@ -57,7 +62,15 @@ public class Test2 {
 //		System.err.println(FaceID.faceCrop(base64Image));
 		
 		OCRParser parser = new OCRParser();
-        System.err.println(parser.parsing(encodstring1, encodstring2));
+		String jsonOcr = parser.parsing(encodstring1, encodstring2);
+        
+        
+        OCRField ocrField = new Gson().fromJson(jsonOcr, OCRField.class);
+        
+        NoiDungOCR noiDungOCR = new NoiDungOCR();
+        noiDungOCR.convert(ocrField);
+        
+        System.out.println(new Gson().toJson(noiDungOCR));
 	}
 	private static String encodeFileToBase64Binary(File file) throws Exception{
         FileInputStream fileInputStreamReader = new FileInputStream(file);

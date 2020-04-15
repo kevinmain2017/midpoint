@@ -61,26 +61,26 @@ public class OcrController {
 		
 		MUser mUser = mserRepository.findByOid(allParams.get("user_oid"));
 		
-		if(mUser.getEmployeeNumber().equals(ocrField.getId())) {
-			MUserType mUserType = mUserTypeRepository.findByUserOidAndTypeCode(ocrField.getUserOid(), ocrField.getTypeCode());
-			if(mUserType == null) {
-				mUserType = new MUserType();
-				mUserType.setOid(UUID.randomUUID().toString());
-			} else {
-				
-			}
-			mUserType.setUserOid(ocrField.getUserOid());
-			mUserType.setTypeCode(ocrField.getTypeCode());
-			mUserType.setInfo(new Gson().toJson(ocrField));
-			
-			mUserTypeRepository.save(mUserType);
-			
-			resp.setData("true");
-			resp.setStatusCode(HttpStatus.OK.value());
-		} else {
-			resp.setData("false");
-			resp.setStatusCode(HttpStatus.NOT_MODIFIED.value());
-		}
+//		if(mUser.getEmployeeNumber().equals(ocrField.getId())) {
+//			MUserType mUserType = mUserTypeRepository.findByUserOidAndTypeCode(ocrField.getUserOid(), ocrField.getTypeCode());
+//			if(mUserType == null) {
+//				mUserType = new MUserType();
+//				mUserType.setOid(UUID.randomUUID().toString());
+//			} else {
+//				
+//			}
+//			mUserType.setUserOid(ocrField.getUserOid());
+//			mUserType.setTypeCode(ocrField.getTypeCode());
+//			mUserType.setInfo(new Gson().toJson(ocrField));
+//			
+//			mUserTypeRepository.save(mUserType);
+//			
+//			resp.setData("true");
+//			resp.setStatusCode(HttpStatus.OK.value());
+//		} else {
+//			resp.setData("false");
+//			resp.setStatusCode(HttpStatus.NOT_MODIFIED.value());
+//		}
 		return new Gson().toJson(resp);
 	}
 }
