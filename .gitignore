@@ -40,3 +40,4 @@ target/
 *.class
 *.class
 share/target/*
+share/target/classes/share/share/App.class
