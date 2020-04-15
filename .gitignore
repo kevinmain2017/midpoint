@@ -39,3 +39,4 @@ target/
 *.class
 *.class
 *.class
+share/target/*
