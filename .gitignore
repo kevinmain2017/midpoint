@@ -41,3 +41,13 @@ target/
 *.class
 share/target/*
 share/target/classes/share/share/App.class
+share/target/classes/fis/com/vn/entities/OCRField.class
+share/target/classes/fis/com/vn/resp/Resp.class
+share/target/classes/fis/com/vn/table/MType.class
+share/target/classes/fis/com/vn/table/MUser.class
+share/target/classes/fis/com/vn/table/MUserType.class
+share/target/classes/share/share/App.class
+share/target/maven-archiver/pom.properties
+share/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+share/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+share/target/share-0.0.1-SNAPSHOT.jar

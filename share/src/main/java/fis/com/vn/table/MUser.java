@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -20,38 +19,54 @@ public class MUser {
 	@Column(name = "fullName_orig")
 	String hoVaTen;
 	
-	@Column(name = "phone")
+	@Column(name = "dienThoai")
 	String dienThoai;
 	
-	@Column(name = "employeeNumber")
+	@Column(name = "soCmt")
 	String soCmt;
 	
-	@Transient
+	@Column(name = "namSinh")
 	String namSinh;
-	@Transient
+	
+	@Column(name = "gioiTinh")
 	String gioiTinh;
-	@Transient
+	
+	@Column(name = "danToc")
 	String danToc;
-	@Transient
+	
+	@Column(name = "queQuan")
 	String queQuan;
-	@Transient
+	
+	@Column(name = "noiTru")
 	String noiTru;
-	@Transient
+	
+	@Column(name = "tonGiao")
 	String tonGiao;
-	@Transient
+	
+	@Column(name = "ngayCap")
 	String ngayCap;
-	@Transient
+	
+	@Column(name = "noiCap")
 	String noiCap;
-	@Transient
+	
+	@Column(name = "email")
 	String email;
-	@Transient
+	
+	@Column(name = "diaChi")
 	String diaChi;
-	@Transient
+	
+	@Column(name = "soHoChieu")
 	String soHoChieu;
-	@Transient
+	
+	@Column(name = "soGiayPhepLaiXe")
 	String soGiayPhepLaiXe;
-	@Transient
+	
+	@Column(name = "mstCaNhan")
 	String mstCaNhan;
-	@Transient
+	
+	@Column(name = "maSoBHXH")
 	String maSoBHXH;
+	
+	@Column(name = "trangThai")
+	String trangThai;
 }

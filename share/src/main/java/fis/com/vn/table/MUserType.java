@@ -13,9 +13,9 @@ import lombok.Data;
 public class MUserType {
 	@Id
 	String oid;
-	@Column(name = "type_code")
+	@Column(name = "typeCode")
 	String typeCode;
-	@Column(name = "user_oid")
+	@Column(name = "userOid")
 	String userOid;
 	String info;
 }

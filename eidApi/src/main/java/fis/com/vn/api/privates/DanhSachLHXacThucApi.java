@@ -16,6 +16,9 @@ import com.google.gson.Gson;
 
 import fis.com.vn.api.publics.BaseApi;
 import fis.com.vn.common.HttpStatusApi;
+import fis.com.vn.common.Midpoint;
+import fis.com.vn.midpoint.JsonUser;
+import fis.com.vn.midpoint.JsonUserType;
 import fis.com.vn.repository.MTypeRepository;
 import fis.com.vn.repository.MUserRepository;
 import fis.com.vn.repository.MUserTypeRepository;
@@ -31,6 +34,7 @@ public class DanhSachLHXacThucApi extends BaseApi{
 	@Autowired MUserRepository mUserRepository;
 	@Autowired
 	MUserTypeRepository mUserTypeRepository;
+	@Autowired Midpoint midpoint;
 	
 	@GetMapping(value = "/private/loai-hinh-xac-thuc", produces = MediaType.APPLICATION_JSON_VALUE)
 	public String xt(HttpServletRequest req, Authentication authentication) {
@@ -76,18 +80,22 @@ public class DanhSachLHXacThucApi extends BaseApi{
 			
 			MUserType mUserType = mUserTypeRepository.findByUserOidAndTypeCode(mUser.getOid(), allParams.get("code"));
 			if(mUserType == null) {
-				mUserType = new MUserType();
-				mUserType.setOid(UUID.randomUUID().toString());
-			} else {
+				JsonUserType jsonUserType = midpoint.createUserTypeInsert(mUser.getOid(), allParams.get("thongTinBoXung"), allParams.get("code"));
 				
+				int check = midpoint.insertToApiMidPoint(new Gson().toJson(jsonUserType), "userTypeType");
+				if(check == 201) {
+					
+					resp.setStatus(HttpStatusApi.THANH_CONG);
+				} else {
+					resp.setStatus(HttpStatusApi.THAT_BAI);
+					resp.setData("Lưu thông tin thất bại");
+				}
+			} else {
+				resp.setStatus(HttpStatusApi.THAT_BAI);
+				resp.setMessage("Phương thức xác thực đã được đăng ký");
 			}
-			mUserType.setUserOid(mUser.getOid());
-			mUserType.setTypeCode(allParams.get("code"));
-			mUserType.setInfo(allParams.get("thongTinBoXung"));
+
 			
-			mUserTypeRepository.save(mUserType);
-			
-			resp.setStatus(HttpStatusApi.THANH_CONG);
 		} catch (Exception e) {
 			resp.setStatus(HttpStatusApi.THAT_BAI);
 			resp.setMessage("Đăng ký thất bại");

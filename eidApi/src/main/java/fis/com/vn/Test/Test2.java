@@ -43,8 +43,8 @@ public class Test2 {
 //        String imageBase64 = OCRParser.encodeFileToBase64Binary(new File("C:\\Users\\vdc\\Downloads\\imgpsh_fullsize_anim.jpg"));
 //        System.out.println(imageBase64);
 //        System.err.println(FaceID.faceRecognition(imageBase64));
-		File file1 = new File("C:\\Users\\chinhvd4\\Pictures\\mt.jpg");
-        File file2 = new File("C:\\Users\\chinhvd4\\Pictures\\ms.jpg");
+		File file1 = new File("C:\\Users\\chinhvd4\\Pictures\\ho-chieu(1).jpg");
+        File file2 = new File("C:\\Users\\chinhvd4\\Pictures\\mshc.jpg");
         byte[] fileContent1 = null;
         byte[] fileContent2 = null;
 

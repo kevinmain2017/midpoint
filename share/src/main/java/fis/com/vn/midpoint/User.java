@@ -12,8 +12,22 @@ public class User {
 	String givenName;
 	String familyName;
 	String title;
-	String address;
-	String phone;
 	String employeeNumber;
 	Credentials credentials;
+	String noiTru;
+	String dienThoai;
+	String soCmt;
+	String namSinh;
+	String gioiTinh;
+	String danToc;
+	String queQuan;
+	String tonGiao;
+	String ngayCap;
+	String noiCap;
+	String email;
+	String diaChi;
+	String soHoChieu;
+	String soGiayPhepLaiXe;
+	String mstCaNhan;
+	String maSoBHXH;
 }
