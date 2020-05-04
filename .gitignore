@@ -1,40 +1,29 @@
-
-.metadata/*
-/.metadata/
-/target/
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**
-!**/src/test/**
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
+*~
 .project
+.classpath
 .settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+/.idea/
+/.metadata/
 *.iml
-*.ipr
+*.log
+*.versionsBackup
+target/
+rebel.xml
+samples/model-client-sample-dotnet/ModelClientSample/ModelClientSample/bin
+samples/model-client-sample-dotnet/ModelClientSample/ModelClientSample/obj
+velocity.log
+.java-version
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/target/
-/.nb-gradle/
-#build/
+dependency-reduced-pom.xml
+/nb-configuration.xml
+/nbactions.xml
 
-### VS Code ###
-.vscode/
-*.MF
-*.class
-*.class
-*.class
+.DS_Store
+
+tools/schrodinger/build
+testing/schrodingertest/build
+
+test-output/
+
+_mess
+.checkstyle
