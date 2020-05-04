@@ -9,13 +9,14 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "m_user_type")
-public class MUserType {
+@Table(name = "m_type_paper")
+public class MTypePaper {
 	@Id
 	String oid;
-	@Column(name = "typeCode")
-	String typeCode;
-	@Column(name = "userOid")
-	String userOid;
-	String info;
+	
+	@Column(name = "name")
+	String ten;
+	
+	@Column(name = "code")
+	String ma;
 }

@@ -29,15 +29,15 @@ public class EidFilter extends GenericFilterBean{
 		resp.setCharacterEncoding("utf-8");
 		req.setCharacterEncoding("utf-8");
 		
-//		if(req.getRequestURI().startsWith("/public")) {
-//			if(req.getHeader("token") != null && req.getHeader("token").equals(Contains.TOKEN_PUBLIC_API)) {
-//				chain.doFilter(request, response);
-//				return;
-//			} else {
-//				resp.getWriter().print("Not permission");
-//				return;
-//			}
-//		}
+		if(req.getRequestURI().startsWith("/public")) {
+			if(req.getHeader("token") != null && req.getHeader("token").equals(Contains.TOKEN_PUBLIC_API)) {
+				chain.doFilter(request, response);
+				return;
+			} else {
+				resp.getWriter().print("Not permission");
+				return;
+			}
+		}
 		
 		chain.doFilter(request, response);
 	}

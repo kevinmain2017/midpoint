@@ -97,33 +97,33 @@ public class RegisterController extends BaseController{
 
 	public JsonUser createUserInsert(ParamsUser paramsUser) {
 		JsonUser jsonUser = new JsonUser();
-		User user = new User();
-		fis.com.vn.midpoint.Value value = new fis.com.vn.midpoint.Value();
-		value.setClearValue(paramsUser.getPassword());
-		Password password = new Password();
-		password.setValue(value);
-		Credentials credentials = new Credentials();
-		credentials.setPassword(password);
-		user.setCredentials(credentials);
-		Activation activation = new Activation();
-		activation.setAdministrativeStatus("enabled");
-		user.setActivation(activation);
-		TargetRef targetRef = new TargetRef();
-		targetRef.setOid("00000000-0000-0000-0000-000000000004");
-		Assignment  assignment = new Assignment();
-		assignment.setTargetRef(targetRef);
-		user.setAssignment(assignment);
-		
-		user.setOid(UUID.randomUUID().toString());
-		user.setName(paramsUser.getName());
-		user.setFullName(paramsUser.getFullName());
-		user.setGivenName("");
-		user.setFamilyName("");
-		user.setTitle("");
-		user.setAddress(paramsUser.getAddress());
-		user.setPhone(paramsUser.getPhone());
-		user.setEmployeeNumber(paramsUser.getId());
-		jsonUser.setUser(user);
+//		User user = new User();
+//		fis.com.vn.midpoint.Value value = new fis.com.vn.midpoint.Value();
+//		value.setClearValue(paramsUser.getPassword());
+//		Password password = new Password();
+//		password.setValue(value);
+//		Credentials credentials = new Credentials();
+//		credentials.setPassword(password);
+//		user.setCredentials(credentials);
+//		Activation activation = new Activation();
+//		activation.setAdministrativeStatus("enabled");
+//		user.setActivation(activation);
+//		TargetRef targetRef = new TargetRef();
+//		targetRef.setOid("00000000-0000-0000-0000-000000000004");
+//		Assignment  assignment = new Assignment();
+//		assignment.setTargetRef(targetRef);
+//		user.setAssignment(assignment);
+//		
+//		user.setOid(UUID.randomUUID().toString());
+//		user.setName(paramsUser.getName());
+//		user.setFullName(paramsUser.getFullName());
+//		user.setGivenName("");
+//		user.setFamilyName("");
+//		user.setTitle("");
+////		user.setAddress(paramsUser.getAddress());
+////		user.setPhone(paramsUser.getPhone());
+//		user.setEmployeeNumber(paramsUser.getId());
+//		jsonUser.setUser(user);
 		return jsonUser;
 	}
 	

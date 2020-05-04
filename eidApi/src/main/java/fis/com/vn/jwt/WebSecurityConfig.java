@@ -19,10 +19,10 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
                 .antMatchers("/").permitAll() ///api/
                 .antMatchers("/public/*").permitAll()
                 .antMatchers("/api/*").permitAll()
-                .antMatchers(HttpMethod.GET, "/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/public/dang-nhap").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
+                .addFilterBefore(new JWTLoginFilter("/public/dang-nhap", authenticationManager()),
                         UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JWTAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
