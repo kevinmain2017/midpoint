@@ -54,11 +54,11 @@ public class CustomUserDetails implements UserDetails{
 
 	@Override
 	public boolean isEnabled() {
-		if(user.getTrangThai().equals("01")) {
+//		if(user.getTrangThai().equals("01")) {
 			return true;
-		} else {
-			return false;
-		}
+//		} else {
+//			return false;
+//		}
 	}
 
 }
