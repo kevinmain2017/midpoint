@@ -1,14 +1,14 @@
 package fis.com.vn.Test;
 
 import com.fis.faceid.FaceID;
-import com.fis.ocr.OCRParser;
 import com.google.gson.Gson;
 
 import fis.com.vn.entities.OCRField;
 import fis.com.vn.response.NoiDungOCR;
+import fis.com.vn.vision.OCRParser;
+import fis.com.vn.vision.entities.Ocr;
 
 import org.apache.commons.io.IOUtils;
-import vn.com.fis.esigncloud.eSignDemo;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,34 +43,27 @@ public class Test2 {
 //        String imageBase64 = OCRParser.encodeFileToBase64Binary(new File("C:\\Users\\vdc\\Downloads\\imgpsh_fullsize_anim.jpg"));
 //        System.out.println(imageBase64);
 //        System.err.println(FaceID.faceRecognition(imageBase64));
-		File file1 = new File("C:\\Users\\chinhvd4\\Pictures\\ho-chieu(1).jpg");
-        File file2 = new File("C:\\Users\\chinhvd4\\Pictures\\mshc.jpg");
-        byte[] fileContent1 = null;
-        byte[] fileContent2 = null;
-
-
-
-        String encodstring1 = encodeFileToBase64Binary(file1);
-
-        String encodstring2 = encodeFileToBase64Binary(file2);
-        System.out.println(encodstring1);
-        System.out.println(encodstring2);
+//		File file1 = new File("C:\\Users\\chinhvd4\\Pictures\\ho-chieu(1).jpg");
+//        File file2 = new File("C:\\Users\\chinhvd4\\Pictures\\mshc.jpg");
+//        byte[] fileContent1 = null;
+//        byte[] fileContent2 = null;
+//
+//
+//
+//        String encodstring1 = encodeFileToBase64Binary(file1);
+//
+//        String encodstring2 = encodeFileToBase64Binary(file2);
+//        System.out.println(encodstring1);
+//        System.out.println(encodstring2);
         
-        
-		FaceID.init("C:\\Users\\chinhvd4\\Downloads\\lbpcascade_frontalface_improved.xml");
-//		String base64Image = OCRParser.encodeFileToBase64Binary(new File("C:\\Users\\chinhvd4\\Pictures\\imgpsh_fullsize.jpg"));
-//		System.err.println(FaceID.faceCrop(base64Image));
+        FaceID.init("D:\\CHINH\\project\\midpoint\\eidApi\\src\\main\\resources\\lbpcascade_frontalface_improved.xml");
+		String base64Image = com.fis.ocr.OCRParser.encodeFileToBase64Binary(new File("D:\\CHINH\\anh\\anhcmtreal\\baclt_cmt_mt.jpg"));
+		System.err.println("aa:"+FaceID.faceCrop(base64Image));
 		
-		OCRParser parser = new OCRParser();
-		String jsonOcr = parser.parsing(encodstring1, encodstring2);
-        
-        
-        OCRField ocrField = new Gson().fromJson(jsonOcr, OCRField.class);
-        
-        NoiDungOCR noiDungOCR = new NoiDungOCR();
-        noiDungOCR.convert(ocrField);
-        
-        System.out.println(new Gson().toJson(noiDungOCR));
+//		OCRParser parser = new OCRParser();
+//		Ocr jsonOcr = parser.parsing(encodstring1, encodstring2, "cmtnd");
+//        
+//        System.out.println(new Gson().toJson(jsonOcr));
 	}
 	private static String encodeFileToBase64Binary(File file) throws Exception{
         FileInputStream fileInputStreamReader = new FileInputStream(file);
