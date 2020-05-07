@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Iterator;
@@ -26,19 +27,19 @@ public class Test {
 	static String folderPath = "D:\\CHINH\\anh\\anhcmt";
 
 	public static void main(String[] args) throws Exception {
-//		final File folder = new File(folderPath);
-//		listFilesForFolder(folder);
+		final File folder = new File(folderPath);
+		listFilesForFolder(folder);
 
-		ArrayList<String> arr = new ArrayList<String>();
-
-		File myObj = new File("info.txt");
-		Scanner myReader = new Scanner(myObj);
-		while (myReader.hasNextLine()) {
-			String data = myReader.nextLine();
-			arr.add(data);
-		}
-		myReader.close();
-		exportXslt(arr);
+//		ArrayList<String> arr = new ArrayList<String>();
+//
+//		File myObj = new File("info.txt");
+//		Scanner myReader = new Scanner(myObj);
+//		while (myReader.hasNextLine()) {
+//			String data = myReader.nextLine();
+//			arr.add(data);
+//		}
+//		myReader.close();
+//		exportXslt(arr);
 	}
 
 	public static void listFilesForFolder(final File folder) throws Exception {
@@ -84,9 +85,9 @@ public class Test {
 						stringBuilder.append("|");
 						stringBuilder.append(noiDungOCR.getHoVaTen());
 						stringBuilder.append("|");
-						stringBuilder.append(noiDungOCR.getNamSinh());
+						stringBuilder.append(formatStringDate(noiDungOCR.getNamSinh()));
 						stringBuilder.append("|");
-						stringBuilder.append(noiDungOCR.getNgayCap());
+						stringBuilder.append(formatStringDate(noiDungOCR.getNgayCap()));
 						stringBuilder.append("|");
 						stringBuilder.append(noiDungOCR.getNoiCap());
 						stringBuilder.append("|");
@@ -103,7 +104,7 @@ public class Test {
 			}
 		}
 
-		BufferedWriter writer = new BufferedWriter(new FileWriter("info.txt"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter("infoNew.txt"));
 		writer.write(stringBuilder.toString());
 
 		writer.close();
@@ -160,7 +161,18 @@ public class Test {
 		}
 		return username + "|||";
 	}
-
+	public static String formatStringDate(String strDate) {
+		try {
+			if(strDate != null) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+				
+				return dateFormat.format(dateFormat.parse(strDate));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return strDate;
+	}
 	private static String encodeFileToBase64Binary(File file) throws Exception {
 		FileInputStream fileInputStreamReader = new FileInputStream(file);
 		byte[] bytes = new byte[(int) file.length()];

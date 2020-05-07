@@ -56,17 +56,17 @@ public class AnhVaThongTin {
 				String checkApi2 = "false";
 				String checkApi = "false";
 				
-				ResponeAcs responeAcFake = checkFake(folderPathFake+"\\"+noiDungOCR.getTenFile());
-				if(!responeAcFake.getResult().getRs().equals("REAL")) {
+				ResponeAcs responeAcFake = checkFake(folderPath+"\\"+noiDungOCR.getTenFile());
+				if(responeAcFake.getResult().getRs().equals("REAL")) {
 					checkApi1 = "true";
 				} else {
 					checkApi1 = "false";
 				}
 				
 				System.out.println(new Gson().toJson(noiDungOCR));
-				ResponeAcs responeAcs = check(noiDungOCR, folderPathFake, i);
+				ResponeAcs responeAcs = check(noiDungOCR, folderPath, i);
 				
-				if(responeAcs.getResult().getAnonymous() != 0) {
+				if(responeAcs.getResult().getAnonymous() == 0) {
 					checkApi2 = "true";
 					countTrue ++;
 				} else {

@@ -82,7 +82,7 @@ public class OCRParser {
 	private Ocr callHoChieu(String base64AnhMatTruoc) throws JsonMappingException {
 		Ocr ocr = new Ocr();
 		if(!StringUtils.isEmpty(base64AnhMatTruoc)) {
-			String jsonMatTruoc = sendRequest(base64AnhMatTruoc, ContainsVision.VISION_HO_CHIEU, ContainsVision.LAY_KHUON_MAT);
+			String jsonMatTruoc = sendRequest(base64AnhMatTruoc, ContainsVision.VISION_HO_CHIEU, ContainsVision.KHONG_LAY_KHUON_MAT);
 			
 			ResponseOcrHoChieu responseOcrHoChieu = new Gson().fromJson(jsonMatTruoc, ResponseOcrHoChieu.class);
 			
@@ -96,14 +96,14 @@ public class OCRParser {
 	private Ocr callGiayPhepLaiXe(String base64AnhMatTruoc, String base64AnhMatSau) throws JsonMappingException {
 		Ocr ocr = new Ocr();
 		if(!StringUtils.isEmpty(base64AnhMatTruoc)) {
-			String jsonMatTruoc = sendRequest(base64AnhMatTruoc, ContainsVision.VISION_BLX, ContainsVision.LAY_KHUON_MAT);
+			String jsonMatTruoc = sendRequest(base64AnhMatTruoc, ContainsVision.VISION_GIAY_PHEP_LAI_XE, ContainsVision.KHONG_LAY_KHUON_MAT);
 			
 			ResponseOcrBlx responseOcrBlx = new Gson().fromJson(jsonMatTruoc, ResponseOcrBlx.class);
 			OcrBlx ocrBlx =  responseOcrBlx.getData().get(0);
 			Common.updateObjectToObject(ocr, ocrBlx );
 		}
 		if(!StringUtils.isEmpty(base64AnhMatSau)) {
-			String jsonMatSau = sendRequest(base64AnhMatSau, ContainsVision.VISION_CMT_CCCD, ContainsVision.LAY_KHUON_MAT);
+			String jsonMatSau = sendRequest(base64AnhMatSau, ContainsVision.VISION_CMT_CCCD, ContainsVision.KHONG_LAY_KHUON_MAT);
 			
 			ResponseOcrBlx responseOcrBlx = new Gson().fromJson(jsonMatSau, ResponseOcrBlx.class);
 			OcrBlx ocrBlx =  responseOcrBlx.getData().get(0);
@@ -116,7 +116,7 @@ public class OCRParser {
 	private Ocr callCmtCccd(String base64AnhMatTruoc, String base64AnhMatSau) throws JsonMappingException {
 		Ocr ocr = new Ocr();
 		if(!StringUtils.isEmpty(base64AnhMatTruoc)) {
-			String jsonMatTruoc = sendRequest(base64AnhMatTruoc, ContainsVision.VISION_CMT_CCCD, ContainsVision.LAY_KHUON_MAT);
+			String jsonMatTruoc = sendRequest(base64AnhMatTruoc, ContainsVision.VISION_CMT_CCCD, ContainsVision.KHONG_LAY_KHUON_MAT);
 			
 			ResponseOcrCmtCccd responseOcrCmtCccd = new Gson().fromJson(jsonMatTruoc, ResponseOcrCmtCccd.class);
 			
@@ -124,7 +124,7 @@ public class OCRParser {
 			Common.updateObjectToObject(ocr, ocrCmtCccd);
 		}
 		if(!StringUtils.isEmpty(base64AnhMatSau)) {
-			String jsonMatSau = sendRequest(base64AnhMatSau, ContainsVision.VISION_CMT_CCCD, ContainsVision.LAY_KHUON_MAT);
+			String jsonMatSau = sendRequest(base64AnhMatSau, ContainsVision.VISION_CMT_CCCD, ContainsVision.KHONG_LAY_KHUON_MAT);
 			ResponseOcrCmtCccd responseOcrCmtCccd = new Gson().fromJson(jsonMatSau, ResponseOcrCmtCccd.class);
 			
 			OcrCmtCccd ocrCmtCccd = responseOcrCmtCccd.getData().get(0);

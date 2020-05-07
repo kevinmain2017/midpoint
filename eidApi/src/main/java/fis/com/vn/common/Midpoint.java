@@ -24,12 +24,14 @@ import fis.com.vn.midpoint.Credentials;
 import fis.com.vn.midpoint.ItemDelta;
 import fis.com.vn.midpoint.JsonModify;
 import fis.com.vn.midpoint.JsonUser;
+import fis.com.vn.midpoint.JsonUserImage;
 import fis.com.vn.midpoint.JsonUserType;
 import fis.com.vn.midpoint.Modify;
 import fis.com.vn.midpoint.ParamsUser;
 import fis.com.vn.midpoint.Password;
 import fis.com.vn.midpoint.TargetRef;
 import fis.com.vn.midpoint.User;
+import fis.com.vn.midpoint.UserImage;
 import fis.com.vn.midpoint.UserType;
 import fis.com.vn.request.Params;
 
@@ -76,6 +78,17 @@ public class Midpoint {
 		jsonModify.setObjectModification(itemDelta);
 		
 		return jsonModify;
+	}
+	
+	public JsonUserImage createUserImageInsert(String userOid, String image) {
+		JsonUserImage jsonUserImage = new JsonUserImage();
+		UserImage userImage = new UserImage();
+		userImage.setImage(image);
+		userImage.setUserOid(userOid);
+		
+		jsonUserImage.setUserImage(userImage);
+		
+		return jsonUserImage;
 	}
 	
 	public JsonUserType createUserTypeInsert(String userOid, String info, String typeCode) {
