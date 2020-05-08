@@ -80,7 +80,7 @@ public class Midpoint {
 		credentials.setPassword(password);
 		user.setCredentials(credentials);
 		Activation activation = new Activation();
-//		activation.setAdministrativeStatus("enabled");
+		activation.setAdministrativeStatus("enabled");
 		user.setActivation(activation);
 		TargetRef targetRef = new TargetRef();
 		targetRef.setOid("00000000-0000-0000-0000-000000000008");
