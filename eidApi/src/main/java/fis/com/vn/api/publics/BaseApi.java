@@ -3,6 +3,7 @@ package fis.com.vn.api.publics;
 import java.text.SimpleDateFormat;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 
@@ -13,6 +14,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Controller
 public class BaseApi {
+	@Value("${folder.image}")
+	public String folder;
+	
 	public String getStringParams(Map<String, String> allParams, String nameParam) {
 		if (StringUtils.isEmpty(allParams.get(nameParam))) {
 			return null;

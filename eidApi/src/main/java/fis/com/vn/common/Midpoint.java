@@ -1,5 +1,6 @@
 package fis.com.vn.common;
 
+import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,13 +24,16 @@ import fis.com.vn.midpoint.Credentials;
 import fis.com.vn.midpoint.ItemDelta;
 import fis.com.vn.midpoint.JsonModify;
 import fis.com.vn.midpoint.JsonUser;
+import fis.com.vn.midpoint.JsonUserImage;
 import fis.com.vn.midpoint.JsonUserType;
 import fis.com.vn.midpoint.Modify;
 import fis.com.vn.midpoint.ParamsUser;
 import fis.com.vn.midpoint.Password;
 import fis.com.vn.midpoint.TargetRef;
 import fis.com.vn.midpoint.User;
+import fis.com.vn.midpoint.UserImage;
 import fis.com.vn.midpoint.UserType;
+import fis.com.vn.request.Params;
 
 @Component
 public class Midpoint {
@@ -39,22 +43,52 @@ public class Midpoint {
 	@Value("${spring.api.midpoint.token}")
 	public String tokenConnectMidpoint;
 	
-	public JsonModify createModify(Map<String, String> allParams) {
+	public JsonModify createModify(Params params) {
 		JsonModify jsonModify = new JsonModify();
 		ItemDelta itemDelta = new ItemDelta();
 		ArrayList<Modify>  modifies = new ArrayList<Modify>();
-		for (Entry<String, String> entry : allParams.entrySet()) {
-			if(!StringUtils.isEmpty(entry.getValue())) {
-				Modify modify = new Modify();
-				modify.setPath(entry.getKey());
-				modify.setValue(entry.getValue());
-				modifies.add(modify);
+		
+		try {
+			Field[] fields = params.getClass().getDeclaredFields();
+
+			for (Field field : fields) {
+				field.setAccessible(true);
+				String name = field.getName();
+				Object value = field.get(params);
+				if(!StringUtils.isEmpty(value)) {
+					Modify modify = new Modify();
+					modify.setPath(name);
+					modify.setValue(value.toString());
+					modifies.add(modify);
+				}
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+		
+//		for (Entry<String, String> entry : allParams.entrySet()) {
+//			if(!StringUtils.isEmpty(entry.getValue())) {
+//				Modify modify = new Modify();
+//				modify.setPath(entry.getKey());
+//				modify.setValue(entry.getValue());
+//				modifies.add(modify);
+//			}
+//		}
 		itemDelta.setItemDelta(modifies);
 		jsonModify.setObjectModification(itemDelta);
 		
 		return jsonModify;
+	}
+	
+	public JsonUserImage createUserImageInsert(String userOid, String image) {
+		JsonUserImage jsonUserImage = new JsonUserImage();
+		UserImage userImage = new UserImage();
+		userImage.setImage(image);
+		userImage.setUserOid(userOid);
+		
+		jsonUserImage.setUserImage(userImage);
+		
+		return jsonUserImage;
 	}
 	
 	public JsonUserType createUserTypeInsert(String userOid, String info, String typeCode) {
@@ -69,7 +103,7 @@ public class Midpoint {
 		return jsonUserType;
 	}
 	
-	public JsonUser createUserInsert(ParamsUser paramsUser) {
+	public JsonUser createUserInsert(Params paramsUser) {
 		JsonUser jsonUser = new JsonUser();
 		User user = new User();
 		fis.com.vn.midpoint.Value value = new fis.com.vn.midpoint.Value();
@@ -107,7 +141,7 @@ public class Midpoint {
 		user.setSoGiayPhepLaiXe(paramsUser.getSoGiayPhepLaiXe());
 		user.setMstCaNhan(paramsUser.getMstCaNhan());
 		user.setMaSoBHXH(paramsUser.getMaSoBHXH());
-		
+		System.out.println(user.getOid());
 		jsonUser.setUser(user);
 		return jsonUser;
 	}

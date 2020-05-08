@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.gson.Gson;
 
 import fis.com.vn.api.publics.BaseApi;
+import fis.com.vn.common.Contains;
 import fis.com.vn.common.HttpStatusApi;
 import fis.com.vn.common.Midpoint;
 import fis.com.vn.midpoint.JsonUser;
@@ -82,7 +83,7 @@ public class DanhSachLHXacThucApi extends BaseApi{
 			if(mUserType == null) {
 				JsonUserType jsonUserType = midpoint.createUserTypeInsert(mUser.getOid(), allParams.get("thongTinBoXung"), allParams.get("code"));
 				
-				int check = midpoint.insertToApiMidPoint(new Gson().toJson(jsonUserType), "userTypeType");
+				int check = midpoint.insertToApiMidPoint(new Gson().toJson(jsonUserType), Contains.LINK_INSERT_USER_TYPE);
 				if(check == 201) {
 					
 					resp.setStatus(HttpStatusApi.THANH_CONG);

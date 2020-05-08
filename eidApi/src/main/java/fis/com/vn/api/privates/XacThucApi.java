@@ -1,15 +1,21 @@
 package fis.com.vn.api.privates;
 
+import java.nio.charset.StandardCharsets;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import fis.com.vn.api.publics.BaseApi;
 import fis.com.vn.common.HttpStatusApi;
+import fis.com.vn.request.Params;
+import fis.com.vn.request.ParamsCa;
 import fis.com.vn.resp.RespApi;
 
 @RestController
@@ -19,6 +25,12 @@ public class XacThucApi extends BaseApi{
 	public String faceid(HttpServletRequest req) {
 		RespApi resp = new RespApi();
 		try {
+			String text = IOUtils.toString(req.getInputStream(), StandardCharsets.UTF_8.name());
+			Gson gson = new GsonBuilder()
+					   .setDateFormat("dd/MM/yyyy").create();
+			
+			Params params = gson.fromJson(text.trim(), Params.class);
+			
 			resp.setStatus(HttpStatusApi.THANH_CONG);
 			resp.setMessage("Xác thực thành công");
 		} catch (Exception e) {
@@ -32,6 +44,12 @@ public class XacThucApi extends BaseApi{
 	public String ca(HttpServletRequest req) {
 		RespApi resp = new RespApi();
 		try {
+			String text = IOUtils.toString(req.getInputStream(), StandardCharsets.UTF_8.name());
+			Gson gson = new GsonBuilder()
+					   .setDateFormat("dd/MM/yyyy").create();
+			
+			ParamsCa paramsCa = gson.fromJson(text.trim(), ParamsCa.class);
+			
 			resp.setStatus(HttpStatusApi.THANH_CONG);
 			resp.setMessage("Xác thực thành công");
 		} catch (Exception e) {
@@ -45,6 +63,12 @@ public class XacThucApi extends BaseApi{
 	public String ocr(HttpServletRequest req) {
 		RespApi resp = new RespApi();
 		try {
+			String text = IOUtils.toString(req.getInputStream(), StandardCharsets.UTF_8.name());
+			Gson gson = new GsonBuilder()
+					   .setDateFormat("dd/MM/yyyy").create();
+			
+			Params params = gson.fromJson(text.trim(), Params.class);
+			
 			resp.setStatus(HttpStatusApi.THANH_CONG);
 			resp.setMessage("Xác thực thành công");
 		} catch (Exception e) {
